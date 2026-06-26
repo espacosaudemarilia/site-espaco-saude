@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Avaliação Física | Espaço Saúde</title>
+<meta name="description" content="Avaliação física digital do Estúdio Funcional Espaço Saúde." />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#070812;--card:#111322;--card2:#181b2e;--border:#2f3451;--text:#f7f8ff;--muted:#a6abc3;--green:#00d6a3;--purple:#8a35ff;--cyan:#25d6ff;--danger:#ff5f7a;--grad:linear-gradient(135deg,#00d6a3,#25d6ff,#8a35ff);--shadow:0 22px 70px rgba(0,0,0,.35)}
+body{min-height:100vh;background:radial-gradient(circle at 10% 5%,rgba(0,214,163,.20),transparent 32%),radial-gradient(circle at 95% 0%,rgba(138,53,255,.22),transparent 34%),var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;padding:18px}
+.wrap{width:100%;max-width:1080px;margin:0 auto}.hero{text-align:center;padding:24px 0 18px}.brand{font-weight:900;letter-spacing:.04em;font-size:clamp(24px,4vw,44px);background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.hero p{color:var(--muted);margin-top:8px;font-size:14px}.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0 18px}.tab{border:1px solid var(--border);background:rgba(17,19,34,.75);color:var(--muted);border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer}.tab.active{border-color:var(--green);color:var(--green);background:rgba(0,214,163,.08)}.panel{display:none}.panel.active{display:block}.card{background:rgba(17,19,34,.94);border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:var(--shadow);backdrop-filter:blur(10px);margin-bottom:16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{margin-bottom:13px}.full{grid-column:1/-1}label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:7px}input,select,textarea{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:13px;color:var(--text);font:inherit;padding:14px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,214,163,.12)}textarea{min-height:90px;resize:vertical}.hint{font-size:12px;color:var(--muted);margin-top:6px}.btn{border:0;border-radius:13px;padding:14px 18px;font-weight:900;font-family:'Montserrat',sans-serif;cursor:pointer;color:#fff;background:var(--grad)}.btn.secondary{background:transparent;border:1px solid var(--border);color:var(--muted)}.btn.danger{background:var(--danger)}.btn:disabled{opacity:.55;cursor:not-allowed}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.msg{display:none;border-radius:14px;padding:13px;margin-top:14px;line-height:1.5}.msg.ok{display:block;background:rgba(0,214,163,.1);border:1px solid rgba(0,214,163,.35);color:#cafff2}.msg.err{display:block;background:rgba(255,95,122,.1);border:1px solid rgba(255,95,122,.35);color:#ffd2da}.list{display:flex;flex-direction:column;gap:10px}.item{background:var(--card2);border:1px solid var(--border);border-radius:15px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}.item h3{font-size:16px}.item p{font-size:12px;color:var(--muted);margin-top:4px}.badge{display:inline-block;border:1px solid rgba(0,214,163,.3);background:rgba(0,214,163,.08);color:var(--green);border-radius:999px;padding:3px 8px;font-size:11px;font-weight:800}.report{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:12px}.metric{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:13px}.metric span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.metric b{display:block;font-size:20px;margin-top:5px}.photo-preview{width:100%;max-height:260px;object-fit:cover;border-radius:14px;border:1px solid var(--border);margin-top:8px;background:var(--card2)}.admin-top{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap}.filters{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;margin-top:12px}.hidden{display:none!important}.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:50;display:none;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}.modal-box{width:100%;max-width:850px;max-height:92vh;overflow:auto;background:#fff;color:#151515;border-radius:18px;padding:22px}.modal-box h2,.modal-box h3{color:#111}.modal-box p{color:#333}.print-head{display:flex;justify-content:space-between;gap:12px;align-items:start;border-bottom:1px solid #ddd;padding-bottom:12px;margin-bottom:14px}.print-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.print-card{border:1px solid #ddd;border-radius:10px;padding:10px}.print-card span{display:block;font-size:10px;text-transform:uppercase;color:#666;font-weight:bold}.print-card b{display:block;font-size:17px;margin-top:3px}.print-photo{max-width:210px;border-radius:10px;margin-top:8px;border:1px solid #ddd}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.code{font-weight:900;color:var(--green)}
+@media(max-width:720px){body{padding:12px}.card{padding:16px}.grid,.filters{grid-template-columns:1fr}.full{grid-column:auto}.item{align-items:flex-start;flex-direction:column}.actions .btn{width:100%}.print-grid{grid-template-columns:1fr}.modal-box{padding:16px}}
+@media print{body>*:not(.modal){display:none!important}.modal{position:static;display:block!important;background:#fff;padding:0}.modal-box{max-height:none;box-shadow:none;border-radius:0}.modal-actions{display:none}.print-card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="brand">ESPAÇO SAÚDE</div>
+    <p>Avaliação física digital — simples, rápida e acessível pelo WhatsApp.</p>
+  </section>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="cadastro">Nova avaliação</button>
+    <button class="tab" data-tab="visitante">Acesso visitante</button>
+    <button class="tab" data-tab="admin">Administrador</button>
+  </div>
+
+  <section id="cadastro" class="panel active">
+    <form id="formAvaliacao" class="card">
+      <div class="grid">
+        <div class="field full"><label>Nome completo *</label><input id="nome" required autocomplete="name" placeholder="Ex: Maria Aparecida Silva"></div>
+        <div class="field"><label>WhatsApp *</label><input id="whatsapp" required inputmode="numeric" placeholder="(14) 99999-9999"></div>
+        <div class="field"><label>Evento</label><input id="evento" placeholder="Ex: Avaliação Julho / Feira / Rota 28"></div>
+        <div class="field"><label>Idade</label><input id="idade" inputmode="numeric" placeholder="Ex: 35"></div>
+        <div class="field"><label>Pressão</label><input id="pressao" inputmode="numeric" maxlength="7" placeholder="120/80"></div>
+        <div class="field"><label>Peso</label><input id="peso" inputmode="decimal" placeholder="Ex: 72.5"></div>
+        <div class="field"><label>IMC</label><input id="imc" inputmode="decimal" placeholder="Ex: 24.8"></div>
+        <div class="field"><label>Índice de gordura (%)</label><input id="gordura" inputmode="decimal" placeholder="Ex: 28.4"></div>
+        <div class="field"><label>Índice de músculo (%)</label><input id="musculo" inputmode="decimal" placeholder="Ex: 31.2"></div>
+        <div class="field"><label>Taxa de metabolismo basal</label><input id="tmb" inputmode="numeric" placeholder="Ex: 1450"></div>
+        <div class="field"><label>Idade metabólica</label><input id="idadeMetabolica" inputmode="numeric" placeholder="Ex: 42"></div>
+        <div class="field"><label>Gordura visceral</label><input id="gorduraVisceral" inputmode="decimal" placeholder="Ex: 8"></div>
+        <div class="field full">
+<label>Foto da avaliação</label>
+<label for="foto" class="btn" style="display:inline-block;text-align:center;">📷 Tirar Foto</label>
+<input id="foto" type="file" accept="image/*" capture="environment" style="display:none">
+<div class="hint">Ao tocar no botão, o celular abrirá a câmera para tirar a foto na hora.</div>
+<img id="previewFoto" class="photo-preview hidden" alt="Prévia da foto">
+</div>
+      </div>
+      <button id="btnSalvar" class="btn" type="submit">Salvar avaliação</button>
+      <div id="msgCadastro" class="msg"></div>
+    </form>
+  </section>
+
+  <section id="visitante" class="panel">
+    <div class="card">
+      <h2>Acesso visitante</h2>
+      <p class="hint">Digite o WhatsApp usado no cadastro para visualizar seus resultados.</p>
+      <div class="grid" style="margin-top:14px">
+        <div class="field full"><label>WhatsApp</label><input id="visitWhatsapp" inputmode="numeric" placeholder="(14) 99999-9999"></div>
+      </div>
+      <button class="btn" id="btnVisitante">Ver meus resultados</button>
+      <div id="msgVisitante" class="msg"></div>
+      <div id="visitResults" class="list" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <section id="admin" class="panel">
+    <div id="adminLogin" class="card">
+      <h2>Acesso administrador</h2>
+      <p class="hint">Digite a senha administrativa.</p>
+      <div class="field" style="margin-top:14px"><label>Senha</label><input id="adminSenha" type="password" placeholder="Senha do admin"></div>
+      <button class="btn" id="btnAdminLogin">Entrar</button>
+      <div id="msgAdmin" class="msg"></div>
+    </div>
+
+    <div id="adminArea" class="hidden">
+      <div class="card">
+        <div class="admin-top">
+          <div><h2>Painel administrativo</h2><p class="hint">Consulte avaliações, filtre por evento e gere relatórios.</p></div>
+          <div class="actions"><button class="btn secondary" id="btnExportCsv">Exportar todos CSV</button><button class="btn secondary" id="btnPrintTodos">Relatório geral</button></div>
+        </div>
+        <div class="filters">
+          <div class="field"><label>Buscar pessoa</label><input id="filtroBusca" placeholder="Nome ou WhatsApp"></div>
+          <div class="field"><label>Evento</label><select id="filtroEvento"><option value="">Todos os eventos</option></select></div>
+          <div class="field"><label>Ordenar</label><select id="filtroOrdem"><option value="desc">Mais recentes</option><option value="asc">Mais antigos</option><option value="nome">Nome</option></select></div>
+        </div>
+        <div id="adminResumo" class="report"></div>
+      </div>
+      <div class="card"><div id="adminLista" class="list"></div></div>
+    </div>
+  </section>
+</div>
+
+<div id="modalRelatorio" class="modal">
+  <div class="modal-box">
+    <div id="relatorioConteudo"></div>
+    <div class="modal-actions"><button class="btn secondary" onclick="window.print()">Imprimir / PDF</button><button class="btn secondary" onclick="fecharModal()">Fechar</button></div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDrXoEWTJtdml0UeBP1nVlsR7AovqEd_RQ",
+  authDomain: "rota-28.firebaseapp.com",
+  databaseURL: "https://rota-28-default-rtdb.firebaseio.com",
+  projectId: "rota-28",
+  storageBucket: "rota-28.firebasestorage.app",
+  messagingSenderId: "714266147692",
+  appId: "1:714266147692:web:25521ae1742be5381fd149",
+  measurementId: "G-NWGKV8NR42"
+};
+const ADMIN_PASSWORD = "espacosaude014";
+const COLLECTION = "avaliacoes_espaco_saude";
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const $ = id => document.getElementById(id);
+let avaliacoes = [];
+let fotoBase64 = "";
+
+function cleanPhone(v){return String(v||'').replace(/\D/g,'');}
+function fmtPhone(v){let d=cleanPhone(v).slice(0,11); if(d.length<=2) return d; if(d.length<=7) return `(${d.slice(0,2)}) ${d.slice(2)}`; return `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;}
+function fmtPressao(v){let d=String(v||'').replace(/\D/g,'').slice(0,6); if(d.length<=3) return d; return d.slice(0,3)+'/'+d.slice(3);}
+function numVal(id){const v=$(id).value.trim().replace(',','.'); return v===''?'':Number(v);}
+function val(id){return $(id).value.trim();}
+function msg(id,tipo,html){const el=$(id); el.className='msg '+tipo; el.innerHTML=html;}
+function esc(s){return String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function dataBR(iso){try{return new Date(iso).toLocaleString('pt-BR')}catch{return ''}}
+
+['whatsapp','visitWhatsapp'].forEach(id=>$(id).addEventListener('input',e=>e.target.value=fmtPhone(e.target.value)));
+$('pressao').addEventListener('input',e=>e.target.value=fmtPressao(e.target.value));
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');$(btn.dataset.tab).classList.add('active')}));
+
+async function compressImage(file){return new Promise((resolve,reject)=>{if(!file) return resolve(''); const img=new Image(); const reader=new FileReader(); reader.onload=()=>{img.onload=()=>{const max=900; let w=img.width,h=img.height; if(w>h&&w>max){h=Math.round(h*max/w);w=max}else if(h>=w&&h>max){w=Math.round(w*max/h);h=max} const canvas=document.createElement('canvas'); canvas.width=w; canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h); resolve(canvas.toDataURL('image/jpeg',.72));}; img.onerror=reject; img.src=reader.result;}; reader.onerror=reject; reader.readAsDataURL(file);});}
+$('foto').addEventListener('change',async e=>{fotoBase64=await compressImage(e.target.files[0]); if(fotoBase64){$('previewFoto').src=fotoBase64;$('previewFoto').classList.remove('hidden');}});
+
+$('formAvaliacao').addEventListener('submit',async e=>{e.preventDefault(); const btn=$('btnSalvar'); btn.disabled=true; btn.textContent='Salvando...'; try{const nome=val('nome'); const whats=cleanPhone(val('whatsapp')); if(!nome||!whats) throw new Error('Preencha nome completo e WhatsApp.'); const id='aval_'+Date.now(); const avaliacao={id,nome,whatsapp:whats,whatsappFormatado:fmtPhone(whats),evento:val('evento')||'Sem evento',idade:numVal('idade'),pressao:val('pressao'),peso:numVal('peso'),imc:numVal('imc'),gordura:numVal('gordura'),musculo:numVal('musculo'),tmb:numVal('tmb'),idadeMetabolica:numVal('idadeMetabolica'),gorduraVisceral:numVal('gorduraVisceral'),foto:fotoBase64||'',criadoEm:new Date().toISOString()}; await setDoc(doc(db,COLLECTION,id),{v:avaliacao}); $('formAvaliacao').reset(); $('previewFoto').classList.add('hidden'); fotoBase64=''; msg('msgCadastro','ok',`Avaliação salva com sucesso.<br>Acesso visitante pelo WhatsApp: <span class="code">${fmtPhone(whats)}</span>`);}catch(err){msg('msgCadastro','err','Não foi possível salvar. '+(err.message||''));}finally{btn.disabled=false;btn.textContent='Salvar avaliação';}});
+
+async function carregarAvaliacoes(){const snap=await getDocs(query(collection(db,COLLECTION),orderBy('criadoEm','desc'))); avaliacoes=[]; snap.forEach(d=>avaliacoes.push(d.data().v||d.data())); atualizarEventos(); renderAdmin();}
+function atualizarEventos(){const sel=$('filtroEvento'); const atual=sel.value; const eventos=[...new Set(avaliacoes.map(a=>a.evento||'Sem evento'))].sort(); sel.innerHTML='<option value="">Todos os eventos</option>'+eventos.map(e=>`<option value="${esc(e)}">${esc(e)}</option>`).join(''); sel.value=atual;}
+function filtros(){let arr=[...avaliacoes]; const busca=String($('filtroBusca').value||'').toLowerCase(); const ev=$('filtroEvento').value; if(busca) arr=arr.filter(a=>String(a.nome).toLowerCase().includes(busca)||String(a.whatsapp).includes(cleanPhone(busca))); if(ev) arr=arr.filter(a=>(a.evento||'Sem evento')===ev); const ordem=$('filtroOrdem').value; if(ordem==='asc') arr.sort((a,b)=>String(a.criadoEm).localeCompare(String(b.criadoEm))); else if(ordem==='nome') arr.sort((a,b)=>String(a.nome).localeCompare(String(b.nome))); else arr.sort((a,b)=>String(b.criadoEm).localeCompare(String(a.criadoEm))); return arr;}
+function renderResumo(arr){const eventos=[...new Set(arr.map(a=>a.evento||'Sem evento'))].length; const comFoto=arr.filter(a=>a.foto).length; $('adminResumo').innerHTML=`<div class="metric"><span>Total</span><b>${arr.length}</b></div><div class="metric"><span>Eventos</span><b>${eventos}</b></div><div class="metric"><span>Com foto</span><b>${comFoto}</b></div><div class="metric"><span>Sem foto</span><b>${arr.length-comFoto}</b></div>`;}
+function renderAdmin(){const arr=filtros(); renderResumo(arr); const list=$('adminLista'); if(!arr.length){list.innerHTML='<div class="hint">Nenhuma avaliação encontrada.</div>';return;} list.innerHTML=arr.map(a=>`<div class="item"><div><h3>${esc(a.nome)}</h3><p>${esc(a.whatsappFormatado||fmtPhone(a.whatsapp))} • ${esc(a.evento||'Sem evento')} • ${dataBR(a.criadoEm)}</p></div><div class="actions"><button class="btn secondary" onclick="abrirRelatorio('${a.id}')">Relatório</button></div></div>`).join('');}
+['filtroBusca','filtroEvento','filtroOrdem'].forEach(id=>$(id).addEventListener('input',renderAdmin));
+
+function metric(label,value){return `<div class="print-card"><span>${esc(label)}</span><b>${esc(value||'—')}</b></div>`;}
+function relatorioHTML(a){return `<div class="print-head"><div><h2>Relatório de Avaliação Física</h2><p><b>Espaço Saúde</b><br>${esc(a.nome)} • ${esc(a.whatsappFormatado||fmtPhone(a.whatsapp))}</p></div><div><p><b>Evento:</b> ${esc(a.evento||'Sem evento')}<br><b>Data:</b> ${dataBR(a.criadoEm)}</p></div></div><div class="print-grid">${metric('Idade',a.idade)}${metric('Pressão',a.pressao)}${metric('Peso',a.peso)}${metric('IMC',a.imc)}${metric('Índice de gordura',a.gordura)}${metric('Índice de músculo',a.musculo)}${metric('Metabolismo basal',a.tmb)}${metric('Idade metabólica',a.idadeMetabolica)}${metric('Gordura visceral',a.gorduraVisceral)}</div>${a.foto?`<h3 style="margin-top:18px">Foto</h3><img class="print-photo" src="${a.foto}">`:''}`;}
+window.abrirRelatorio=function(id){const a=avaliacoes.find(x=>x.id===id); if(!a) return; $('relatorioConteudo').innerHTML=relatorioHTML(a); $('modalRelatorio').classList.add('open');}
+window.fecharModal=function(){$('modalRelatorio').classList.remove('open');}
+
+$('btnVisitante').addEventListener('click',async()=>{try{if(!avaliacoes.length) await carregarAvaliacoes(); const whats=cleanPhone($('visitWhatsapp').value); if(!whats) throw new Error('Digite o WhatsApp.'); const arr=avaliacoes.filter(a=>String(a.whatsapp)===whats).sort((a,b)=>String(b.criadoEm).localeCompare(String(a.criadoEm))); if(!arr.length){msg('msgVisitante','err','Nenhuma avaliação encontrada para este WhatsApp.');$('visitResults').innerHTML='';return;} msg('msgVisitante','ok',`${arr.length} avaliação(ões) encontrada(s).`); $('visitResults').innerHTML=arr.map(a=>`<div class="item"><div><h3>${esc(a.nome)}</h3><p>${esc(a.evento||'Sem evento')} • ${dataBR(a.criadoEm)}</p><div class="report">${metric('Peso',a.peso)}${metric('IMC',a.imc)}${metric('Gordura',a.gordura)}${metric('Músculo',a.musculo)}</div></div><button class="btn secondary" onclick="abrirRelatorio('${a.id}')">Ver relatório</button></div>`).join('');}catch(err){msg('msgVisitante','err',err.message||'Erro ao buscar.');}});
+
+$('btnAdminLogin').addEventListener('click',async()=>{if($('adminSenha').value!==ADMIN_PASSWORD){msg('msgAdmin','err','Senha incorreta.');return;} $('adminLogin').classList.add('hidden'); $('adminArea').classList.remove('hidden'); await carregarAvaliacoes();});
+$('btnExportCsv').addEventListener('click',()=>{const arr=filtros(); const headers=['Nome','WhatsApp','Evento','Idade','Pressao','Peso','IMC','Gordura','Musculo','TMB','Idade metabolica','Gordura visceral','Data']; const rows=arr.map(a=>[a.nome,a.whatsappFormatado||fmtPhone(a.whatsapp),a.evento,a.idade,a.pressao,a.peso,a.imc,a.gordura,a.musculo,a.tmb,a.idadeMetabolica,a.gorduraVisceral,dataBR(a.criadoEm)]); const csv=[headers,...rows].map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(';')).join('\n'); const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='avaliacoes_espaco_saude.csv'; a.click(); URL.revokeObjectURL(url);});
+$('btnPrintTodos').addEventListener('click',()=>{const arr=filtros(); $('relatorioConteudo').innerHTML=`<div class="print-head"><div><h2>Relatório Geral de Avaliações</h2><p>Espaço Saúde • ${arr.length} cadastro(s)</p></div><div><p>${new Date().toLocaleString('pt-BR')}</p></div></div>`+arr.map(a=>`<div style="border-bottom:1px solid #ddd;padding:10px 0">${relatorioHTML(a)}</div>`).join(''); $('modalRelatorio').classList.add('open');});
+</script>
+</body>
+</html>

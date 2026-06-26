@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LONGEV — Protocolo de Avaliação Física</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1A3A5C;
+    --green-light: #2563A8;
+    --green-pale: #D6E8F8;
+    --green-bg: #EEF5FC;
+    --gold: #B7941A;
+    --gold-light: #F9F3E0;
+    --dark: #0F2236;
+    --mid: #3A5270;
+    --light: #E2EDF7;
+    --white: #FFFFFF;
+    --border: #B3CCE4;
+    --text: #0F2236;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(26,58,92,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #F0F5FB;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--green);
+    padding: 24px 20px 20px;
+    text-align: center;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(22px, 5vw, 36px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: clamp(11px, 2.5vw, 14px);
+    color: #A8D5B8;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* SECTION CARD */
+  .section-card {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .section-header {
+    background: var(--green);
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(13px, 3vw, 16px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .section-body {
+    padding: 22px 22px 18px;
+  }
+
+  /* FIELD GROUPS */
+  .field-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .field-group.full { flex: 1 1 100%; }
+  .field-group.half { flex: 1 1 calc(50% - 7px); }
+  .field-group.third { flex: 1 1 calc(33% - 10px); }
+
+  label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    background: #F7FAFD;
+    transition: border-color 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--green-light);
+    background: #F0F6FC;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.6;
+  }
+  textarea.large { min-height: 130px; }
+
+  /* SIM/NÃO/NÃO SABE BUTTONS */
+  .sns-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .sns-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .sns-question {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .sns-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .sns-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: #F7FAFD;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mid);
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sns-btn:hover { border-color: var(--green-light); color: var(--green); }
+  .sns-btn.selected-sim { background: #D8F3DC; border-color: var(--green-light); color: var(--green); }
+  .sns-btn.selected-nao { background: #FFE5E5; border-color: #E05C5C; color: #B83232; }
+  .sns-btn.selected-naosabe { background: var(--gold-light); border-color: var(--gold); color: var(--gold); }
+
+  /* CHECKBOX GRID */
+  .check-group {
+    margin-bottom: 16px;
+  }
+  .check-label-main {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .check-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    background: #F7FAFD;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.18s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .check-item input { display: none; }
+  .check-item.checked {
+    background: var(--green-pale);
+    border-color: var(--green-light);
+    color: var(--green);
+    font-weight: 600;
+  }
+  .check-dot {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .check-item.checked .check-dot {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .check-item.checked .check-dot::after {
+    content: '✓';
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+  }
+
+  /* RADIO GROUP */
+  .radio-group {
+    margin-bottom: 16px;
+  }
+  .radio-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .radio-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    background: #F7FAFD;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.18s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .radio-item input { display: none; }
+  .radio-item.selected {
+    background: var(--green-pale);
+    border-color: var(--green-light);
+    color: var(--green);
+    font-weight: 600;
+  }
+  .radio-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .radio-item.selected .radio-dot {
+    border-color: var(--green);
+  }
+  .radio-item.selected .radio-dot::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  /* INLINE FIELD AFTER SNS */
+  .sub-field {
+    margin-top: 10px;
+    padding: 12px;
+    background: var(--light);
+    border-radius: 8px;
+    border-left: 3px solid var(--green-light);
+    display: none;
+  }
+  .sub-field.visible { display: block; }
+  .sub-field label { font-size: 11px; margin-bottom: 4px; }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1.5px solid var(--light);
+    margin: 18px 0;
+  }
+
+  /* RANGE INPUT */
+  .range-group { margin-bottom: 16px; }
+  .range-display {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--green);
+    text-align: center;
+    margin: 6px 0;
+  }
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--green);
+    height: 8px;
+    cursor: pointer;
+  }
+
+  /* ============ PARTS 1/2/3 ============ */
+  .test-card {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .test-header {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--green) 100%);
+    padding: 16px 22px;
+  }
+  .test-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(14px, 3.5vw, 18px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .test-header p {
+    font-size: 12px;
+    color: #A8D5B8;
+    margin-top: 3px;
+    font-weight: 500;
+  }
+  .test-body { padding: 22px; }
+
+  .test-info-block {
+    background: var(--green-bg);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 18px;
+    border-left: 4px solid var(--green-light);
+  }
+  .test-info-block p, .test-info-block li {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+  .test-info-block ul { padding-left: 18px; }
+  .test-info-block li { margin-bottom: 3px; }
+
+  /* SCORE TABLE */
+  .score-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .score-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+  }
+  .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    min-width: 340px;
+  }
+  .score-table thead th {
+    background: var(--green);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .score-table thead th:first-child { text-align: left; }
+  .score-table tbody tr {
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .score-table tbody tr:nth-child(even) { background: #F5F9FD; }
+  .score-table tbody tr:hover { background: var(--green-pale); }
+  .score-table tbody tr.row-selected {
+    background: #2D6A4F !important;
+    color: #fff;
+  }
+  .score-table tbody tr.row-selected td {
+    color: #fff;
+    font-weight: 700;
+  }
+  .score-table tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .score-table tbody td:first-child { text-align: left; font-weight: 600; }
+
+  .classification-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-muitobom { background: #C3F5D4; color: #1A5E36; }
+  .badge-bom { background: #D8F3DC; color: #2D6A4F; }
+  .badge-regular { background: #FFF3CD; color: #856404; }
+  .badge-fraco { background: #FFE0B2; color: #8D4A00; }
+  .badge-muitofraco { background: #FFCDD2; color: #B71C1C; }
+
+  .selected-result-display {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: var(--gold-light);
+    border-radius: 10px;
+    border: 2px solid var(--gold);
+    display: none;
+  }
+  .selected-result-display.visible { display: block; }
+  .selected-result-display p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--dark);
+  }
+  .selected-result-display span {
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  /* SPPB INTERP TABLE */
+  .interp-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .interp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+  }
+  .interp-table thead th {
+    background: var(--green);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+  }
+  .interp-table tbody td {
+    padding: 10px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .interp-table tbody tr:nth-child(even) { background: #F5F9FD; }
+
+  /* UNIPODAL TABLE */
+  .unipodal-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    margin-bottom: 18px;
+  }
+  .unipodal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    min-width: 380px;
+  }
+  .unipodal-table thead th {
+    background: var(--green);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .unipodal-table tbody tr { cursor: pointer; transition: background 0.15s; }
+  .unipodal-table tbody tr:nth-child(even) { background: #F5F9FD; }
+  .unipodal-table tbody tr:hover { background: var(--green-pale); }
+  .unipodal-table tbody tr.row-selected { background: var(--green) !important; }
+  .unipodal-table tbody tr.row-selected td { color: #fff; font-weight: 700; }
+  .unipodal-table tbody td { padding: 10px 12px; border-top: 1px solid var(--border); text-align: center; }
+  .unipodal-table tbody td:first-child { font-weight: 600; text-align: left; }
+
+  /* PREENSAO TABLE */
+  .preen-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    margin-bottom: 18px;
+  }
+  .preen-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    min-width: 440px;
+  }
+  .preen-table thead th {
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .preen-table tbody tr { cursor: pointer; transition: background 0.15s; }
+  .preen-table tbody tr:nth-child(even) { background: #F5F9FD; }
+  .preen-table tbody tr:hover { background: var(--green-pale); }
+  .preen-table tbody tr.row-selected { background: var(--dark) !important; }
+  .preen-table tbody tr.row-selected td { color: #fff; font-weight: 700; }
+  .preen-table tbody td { padding: 10px 12px; border-top: 1px solid var(--border); text-align: center; }
+  .preen-table tbody td:first-child { text-align: left; font-weight: 600; }
+
+  /* GENDER TOGGLE */
+  .gender-toggle {
+    display: flex;
+    gap: 0;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    width: fit-content;
+  }
+  .gender-btn {
+    padding: 9px 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    background: #fff;
+    color: var(--mid);
+    border: none;
+    transition: all 0.18s;
+  }
+  .gender-btn.active { background: var(--green); color: #fff; }
+
+  /* NOTA SLIDER */
+  .nota-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  /* SAVE BUTTON */
+  .save-section {
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px 0 20px;
+  }
+  .btn-save {
+    background: var(--green);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 18px 52px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(45,106,79,0.30);
+    transition: all 0.2s;
+  }
+  .btn-save:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(45,106,79,0.35); }
+  .btn-save:active { transform: translateY(0); }
+
+  /* POST SAVE BUTTONS */
+  .post-save {
+    display: none;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .post-save.visible { display: flex; }
+  .btn-report {
+    background: var(--gold);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 15px 36px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 3px 14px rgba(183,148,26,0.30);
+    transition: all 0.2s;
+  }
+  .btn-report:hover { filter: brightness(1.1); transform: translateY(-2px); }
+  .btn-new {
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 15px 36px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 3px 14px rgba(26,46,35,0.25);
+    transition: all 0.2s;
+  }
+  .btn-new:hover { background: #2D4A38; transform: translateY(-2px); }
+
+  /* SAVED TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--green);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.20);
+    transition: transform 0.35s cubic-bezier(.35,1.4,.6,1);
+    z-index: 999;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* MODAL REPORT */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  .modal-overlay.visible { display: flex; align-items: flex-start; justify-content: center; }
+  .modal-box {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 760px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.30);
+  }
+  .modal-header {
+    background: var(--green);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .modal-close {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    transition: background 0.18s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.35); }
+  .modal-body {
+    padding: 28px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .report-section {
+    margin-bottom: 22px;
+  }
+  .report-section h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 2px solid var(--light);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+  .report-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .report-item {
+    background: var(--green-bg);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  .report-item strong {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--green);
+    font-size: 11px;
+    text-transform: uppercase;
+    display: block;
+  }
+  .btn-print {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: var(--green);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  .btn-print:hover { background: var(--green-light); }
+
+  /* HELPER */
+  .helper-text {
+    font-size: 12px;
+    color: #7A9E8B;
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  .part-label {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 500px) {
+    .section-body, .test-body { padding: 16px 14px; }
+    .field-group.half { flex: 1 1 100%; }
+    .field-group.third { flex: 1 1 100%; }
+    .modal-body { padding: 18px; }
+    .btn-save { padding: 16px 36px; font-size: 14px; }
+    .btn-report, .btn-new { padding: 13px 26px; font-size: 13px; }
+  }
+
+  /* SFT INTERPRETATION PANEL */
+  .sft-interp-panel {
+    margin-top: 14px;
+    background: #F4F8FF;
+    border: 2px dashed #93B8E0;
+    border-radius: 12px;
+    padding: 16px 18px 18px;
+  }
+  .sft-interp-header {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--green-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .sft-interp-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .interp-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #fff;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .interp-option:hover { border-color: var(--green-light); background: var(--green-bg); }
+  .interp-option.selected { border-color: var(--green-light); background: var(--green-pale); }
+  .interp-option-radio {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.18s;
+  }
+  .interp-option.selected .interp-option-radio {
+    border-color: var(--green-light);
+    background: var(--green-light);
+  }
+  .interp-option.selected .interp-option-radio::after {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .interp-option-text { flex: 1; }
+  .interp-option-badge {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+  }
+  .interp-option-desc {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.55;
+    font-weight: 500;
+  }
+
+  @media print {
+    header, .save-section, .post-save, .modal-overlay { display: none !important; }
+    body { background: #fff; }
+    .section-card, .test-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    main { max-width: 100%; padding: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LONGEV</h1>
+  <p>Protocolo de Avaliação Física</p>
+</header>
+
+<main>
+
+<!-- ======================== ANAMNESE ======================== -->
+
+<!-- 1. Identificação -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">Identificação</div>
+  </div>
+  <div class="section-body">
+    <div class="field-row">
+      <div class="field-group full">
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" placeholder="Nome do aluno">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group third">
+        <label for="idade">Idade</label>
+        <input type="tel" id="idade" placeholder="Ex: 67" inputmode="numeric" pattern="[0-9]*">
+      </div>
+      <div class="field-group third">
+        <label>Sexo</label>
+        <div class="radio-items" style="margin-top:2px;">
+          <label class="radio-item" onclick="toggleRadio(this,'sexo')"><input type="radio" name="sexo" value="Feminino"><div class="radio-dot"></div>Feminino</label>
+          <label class="radio-item" onclick="toggleRadio(this,'sexo')"><input type="radio" name="sexo" value="Masculino"><div class="radio-dot"></div>Masculino</label>
+        </div>
+      </div>
+      <div class="field-group third">
+        <label for="profissao">Profissão</label>
+        <input type="text" id="profissao" placeholder="Ex: Professora">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group half">
+        <label for="comquem">Com quem mora</label>
+        <input type="text" id="comquem" placeholder="Ex: Cônjuge e filhos">
+      </div>
+      <div class="field-group half">
+        <label for="telEmergencia">Telefone de Emergência</label>
+        <input type="tel" id="telEmergencia" placeholder="(00) 00000-0000" inputmode="numeric">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group half">
+        <label for="dataAvaliacao">Data da Avaliação</label>
+        <input type="date" id="dataAvaliacao">
+      </div>
+      <div class="field-group half">
+        <label for="avaliador">Avaliador / CREF</label>
+        <input type="text" id="avaliador" placeholder="Nome · CREF 000000-G/XX">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Histórico Médico -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">Histórico Médico</div>
+  </div>
+  <div class="section-body">
+    <span class="check-label-main">Doenças Crônicas</span>
+    <div class="check-grid" id="doencas">
+      <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Hipertensão</label>
+      <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Diabetes</label>
+      <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Osteoporose</label>
+      <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Doenças Cardíacas</label>
+      <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Pulmonares</label>
+      <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Outras</label>
+    </div>
+    <div class="field-group full" style="margin-top:10px;">
+      <label for="doencasObs">Observações sobre doenças</label>
+      <textarea id="doencasObs" class="large" placeholder="Especificar doenças cardíacas, pulmonares ou outras..."></textarea>
+    </div>
+
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-label">Cirurgias</div>
+      <div class="sns-question">Já passou por algum procedimento cirúrgico?</div>
+      <div class="sns-buttons" id="sns_cirurgia">
+        <button class="sns-btn" onclick="selectSNS('sns_cirurgia','Sim',this,'sub_cirurgia')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_cirurgia','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_cirurgia','Não sabe',this,null)">Não sabe</button>
+      </div>
+      <div class="sub-field" id="sub_cirurgia">
+        <label>Qual e quando?</label>
+        <textarea placeholder="Ex: Cirurgia de joelho em 2019..."></textarea>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-label">Medicações</div>
+      <div class="sns-question">Utiliza alguma medicação de uso contínuo?</div>
+      <div class="sns-buttons" id="sns_medicacao">
+        <button class="sns-btn" onclick="selectSNS('sns_medicacao','Sim',this,'sub_medicacao')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_medicacao','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_medicacao','Não sabe',this,null)">Não sabe</button>
+      </div>
+      <div class="sub-field" id="sub_medicacao">
+        <label>Qual e por quê?</label>
+        <textarea placeholder="Ex: Losartana — hipertensão..."></textarea>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-label">Alergias</div>
+      <div class="sns-question">Possui alguma alergia?</div>
+      <div class="sns-buttons" id="sns_alergia">
+        <button class="sns-btn" onclick="selectSNS('sns_alergia','Sim',this,'sub_alergia')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_alergia','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_alergia','Não sabe',this,null)">Não sabe</button>
+      </div>
+      <div class="sub-field" id="sub_alergia">
+        <label>Descreva as alergias (alimentos, medicamentos, outras)</label>
+        <textarea placeholder="Ex: Dipirona, amendoim..."></textarea>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-label">Exames Recentes</div>
+      <div class="sns-question">Fez exames médicos recentemente?</div>
+      <div class="sns-buttons" id="sns_exames">
+        <button class="sns-btn" onclick="selectSNS('sns_exames','Sim',this,'sub_exames')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_exames','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_exames','Não sabe',this,null)">Não sabe</button>
+      </div>
+      <div class="sub-field" id="sub_exames">
+        <label>Algum resultado fora da normalidade? Qual?</label>
+        <textarea placeholder="Ex: Colesterol LDL elevado..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Histórico Familiar -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">Histórico Familiar</div>
+  </div>
+  <div class="section-body">
+    <div class="sns-group">
+      <div class="sns-question">Existe histórico familiar de doenças crônicas?</div>
+      <div class="sns-buttons" id="sns_histfam">
+        <button class="sns-btn" onclick="selectSNS('sns_histfam','Sim',this,'sub_histfam')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_histfam','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_histfam','Não sabe',this,null)">Não sabe</button>
+      </div>
+      <div class="sub-field" id="sub_histfam">
+        <div class="check-grid" style="margin-bottom:10px;">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Hipertensão</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Aterosclerose</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Infarto</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>AVC</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Diabetes T1</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Diabetes T2</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>DPOC</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Asma</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Câncer de Mama</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Câncer de Próstata</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Câncer de Pulmão</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Câncer de Cólon</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Osteoartrite</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Osteoporose</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Alzheimer</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Parkinson</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Esclerose Múltipla</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Insuf. Renal Crônica</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Cirrose Hepática</label>
+        </div>
+        <label style="display:block;margin-bottom:5px;">Outras / Observações</label>
+        <textarea placeholder="Outros cânceres, doenças raras..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Histórico de Atividade Física -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">Histórico de Atividade Física</div>
+  </div>
+  <div class="section-body">
+    <div class="sns-group">
+      <div class="sns-question">Já praticou exercício físico regularmente?</div>
+      <div class="sns-buttons" id="sns_ativfis">
+        <button class="sns-btn" onclick="selectSNS('sns_ativfis','Sim',this,'sub_ativfis')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_ativfis','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_ativfis">
+        <label>Quais exercícios praticou?</label>
+        <textarea placeholder="Ex: Caminhada, musculação..."></textarea>
+        <label style="margin-top:10px;display:block;">Há quanto tempo parou?</label>
+        <div class="radio-items" style="margin-top:6px;">
+          <label class="radio-item" onclick="toggleRadio(this,'parouf')"><input type="radio" name="parouf" value="Até 3 meses"><div class="radio-dot"></div>Até 3 meses</label>
+          <label class="radio-item" onclick="toggleRadio(this,'parouf')"><input type="radio" name="parouf" value="3–6 meses"><div class="radio-dot"></div>3–6 meses</label>
+          <label class="radio-item" onclick="toggleRadio(this,'parouf')"><input type="radio" name="parouf" value="Mais de 6 meses"><div class="radio-dot"></div>Mais de 6 meses</label>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Experiência com exercícios</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'expexerc')"><input type="radio" name="expexerc" value="Positiva"><div class="radio-dot"></div>Positiva</label>
+        <label class="radio-item" onclick="toggleRadio(this,'expexerc')"><input type="radio" name="expexerc" value="Negativa"><div class="radio-dot"></div>Negativa</label>
+      </div>
+    </div>
+    <div class="field-group full" style="margin-top:10px;">
+      <label for="motivo_exp">Motivo da experiência</label>
+      <textarea id="motivo_exp" placeholder="Descreva o motivo..."></textarea>
+    </div>
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-question">Já teve lesão ou desconforto durante atividade física?</div>
+      <div class="sns-buttons" id="sns_lesao">
+        <button class="sns-btn" onclick="selectSNS('sns_lesao','Sim',this,'sub_lesao')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_lesao','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_lesao">
+        <label>Qual a lesão/desconforto?</label>
+        <textarea placeholder="Ex: Dor no joelho esquerdo durante corrida..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. Queixas Principais -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Queixas Principais</div>
+  </div>
+  <div class="section-body">
+    <div class="sns-group">
+      <div class="sns-question">Sente dores articulares ou musculares?</div>
+      <div class="sns-buttons" id="sns_dores">
+        <button class="sns-btn" onclick="selectSNS('sns_dores','Sim',this,'sub_dores')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_dores','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_dores">
+        <span class="check-label-main">Onde?</span>
+        <div class="check-grid">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Pescoço</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Ombros</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Cotovelos</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Coluna Torácica</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Lombar</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Quadril</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Joelhos</label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Tornozelos</label>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-question">Sente falta de ar durante esforços físicos?</div>
+      <div class="sns-buttons" id="sns_faltaar">
+        <button class="sns-btn" onclick="selectSNS('sns_faltaar','Sim',this,null)">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_faltaar','Não',this,null)">Não</button>
+      </div>
+    </div>
+    <div class="sns-group">
+      <div class="sns-question">Tontura, vertigens ou desmaios?</div>
+      <div class="sns-buttons" id="sns_tontura">
+        <button class="sns-btn" onclick="selectSNS('sns_tontura','Sim',this,null)">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_tontura','Não',this,null)">Não</button>
+      </div>
+    </div>
+    <div class="sns-group">
+      <div class="sns-question">Dificuldade para dormir?</div>
+      <div class="sns-buttons" id="sns_sono">
+        <button class="sns-btn" onclick="selectSNS('sns_sono','Sim',this,null)">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_sono','Não',this,null)">Não</button>
+      </div>
+    </div>
+    <div class="sns-group">
+      <div class="sns-question">Alterações no equilíbrio?</div>
+      <div class="sns-buttons" id="sns_equilibrio">
+        <button class="sns-btn" onclick="selectSNS('sns_equilibrio','Sim',this,null)">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_equilibrio','Não',this,null)">Não</button>
+      </div>
+    </div>
+    <div class="sns-group">
+      <div class="sns-question">Incontinência urinária?</div>
+      <div class="sns-buttons" id="sns_incont">
+        <button class="sns-btn" onclick="selectSNS('sns_incont','Sim',this,null)">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_incont','Não',this,null)">Não</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Estilo de Vida -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Estilo de Vida</div>
+  </div>
+  <div class="section-body">
+    <div class="sns-group">
+      <div class="sns-label">Tabagismo</div>
+      <div class="sns-question">Fuma ou já fumou?</div>
+      <div class="sns-buttons" id="sns_tabagismo">
+        <button class="sns-btn" onclick="selectSNS('sns_tabagismo','Sim',this,'sub_tabagismo')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_tabagismo','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_tabagismo','Já fez uso',this,'sub_tabagismo')">Já fez uso</button>
+      </div>
+      <div class="sub-field" id="sub_tabagismo">
+        <label>Há quanto tempo fuma / parou?</label>
+        <input type="text" placeholder="Ex: 20 anos / parei há 5 anos">
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-label">Etilismo</div>
+      <div class="sns-question">Consome bebidas alcoólicas?</div>
+      <div class="sns-buttons" id="sns_alcool">
+        <button class="sns-btn" onclick="selectSNS('sns_alcool','Sim',this,'sub_alcool')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_alcool','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_alcool','Já fez uso',this,'sub_alcool')">Já fez uso</button>
+      </div>
+      <div class="sub-field" id="sub_alcool">
+        <span class="check-label-main">Frequência</span>
+        <div class="radio-items">
+          <label class="radio-item" onclick="toggleRadio(this,'alcool_freq')"><input type="radio" name="alcool_freq" value="Social"><div class="radio-dot"></div>Social</label>
+          <label class="radio-item" onclick="toggleRadio(this,'alcool_freq')"><input type="radio" name="alcool_freq" value="Semanal"><div class="radio-dot"></div>Semanal</label>
+          <label class="radio-item" onclick="toggleRadio(this,'alcool_freq')"><input type="radio" name="alcool_freq" value="Diário"><div class="radio-dot"></div>Diário</label>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Alimentação</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'alimentacao')"><input type="radio" name="alimentacao" value="Saudável"><div class="radio-dot"></div>Saudável</label>
+        <label class="radio-item" onclick="toggleRadio(this,'alimentacao')"><input type="radio" name="alimentacao" value="Inadequada"><div class="radio-dot"></div>Inadequada</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Hidratação (água por dia)</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'hidratacao')"><input type="radio" name="hidratacao" value="Menos de 1 litro"><div class="radio-dot"></div>Menos de 1 litro</label>
+        <label class="radio-item" onclick="toggleRadio(this,'hidratacao')"><input type="radio" name="hidratacao" value="1 a 2 litros"><div class="radio-dot"></div>1 a 2 litros</label>
+        <label class="radio-item" onclick="toggleRadio(this,'hidratacao')"><input type="radio" name="hidratacao" value="2 a 3 litros"><div class="radio-dot"></div>2 a 3 litros</label>
+        <label class="radio-item" onclick="toggleRadio(this,'hidratacao')"><input type="radio" name="hidratacao" value="Mais de 3 litros"><div class="radio-dot"></div>Mais de 3 litros</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Sono</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'sono_hrs')"><input type="radio" name="sono_hrs" value="6–8 horas"><div class="radio-dot"></div>6–8 horas</label>
+        <label class="radio-item" onclick="toggleRadio(this,'sono_hrs')"><input type="radio" name="sono_hrs" value="Mais de 8 horas"><div class="radio-dot"></div>Mais de 8 horas</label>
+        <label class="radio-item" onclick="toggleRadio(this,'sono_hrs')"><input type="radio" name="sono_hrs" value="Menos de 6 horas"><div class="radio-dot"></div>Menos de 6 horas</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Nível de estresse elevado?</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'estresse')"><input type="radio" name="estresse" value="Sim"><div class="radio-dot"></div>Sim</label>
+        <label class="radio-item" onclick="toggleRadio(this,'estresse')"><input type="radio" name="estresse" value="Não"><div class="radio-dot"></div>Não</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Rotina diária</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'rotina')"><input type="radio" name="rotina" value="Leve"><div class="radio-dot"></div>Leve</label>
+        <label class="radio-item" onclick="toggleRadio(this,'rotina')"><input type="radio" name="rotina" value="Moderada"><div class="radio-dot"></div>Moderada</label>
+        <label class="radio-item" onclick="toggleRadio(this,'rotina')"><input type="radio" name="rotina" value="Intensa"><div class="radio-dot"></div>Intensa</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Atividades diárias realizadas</span>
+      <div class="check-grid">
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Subir escadas</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Caminhar</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Carregar peso</label>
+      </div>
+    </div>
+    <div class="field-group full" style="margin-top:4px;">
+      <label for="atividadesObs">Outras atividades</label>
+      <input type="text" id="atividadesObs" placeholder="Ex: Jardinar, cuidar de netos...">
+    </div>
+  </div>
+</div>
+
+<!-- 7. Avaliação Funcional -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">Avaliação Funcional</div>
+  </div>
+  <div class="section-body">
+    <span class="check-label-main">Consegue realizar atividades básicas sem ajuda</span>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+        <span style="font-size:14px;font-weight:600;min-width:160px;">Cuidar da higiene</span>
+        <div class="sns-buttons" id="sns_higiene">
+          <button class="sns-btn" onclick="selectSNS('sns_higiene','Sim',this,null)">Sim</button>
+          <button class="sns-btn" onclick="selectSNS('sns_higiene','Não',this,null)">Não</button>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+        <span style="font-size:14px;font-weight:600;min-width:160px;">Se alimentar</span>
+        <div class="sns-buttons" id="sns_alimentar">
+          <button class="sns-btn" onclick="selectSNS('sns_alimentar','Sim',this,null)">Sim</button>
+          <button class="sns-btn" onclick="selectSNS('sns_alimentar','Não',this,null)">Não</button>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+        <span style="font-size:14px;font-weight:600;min-width:160px;">Vestir-se</span>
+        <div class="sns-buttons" id="sns_vestir">
+          <button class="sns-btn" onclick="selectSNS('sns_vestir','Sim',this,null)">Sim</button>
+          <button class="sns-btn" onclick="selectSNS('sns_vestir','Não',this,null)">Não</button>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+        <span style="font-size:14px;font-weight:600;min-width:160px;">Mover-se em casa</span>
+        <div class="sns-buttons" id="sns_mover">
+          <button class="sns-btn" onclick="selectSNS('sns_mover','Sim',this,null)">Sim</button>
+          <button class="sns-btn" onclick="selectSNS('sns_mover','Não',this,null)">Não</button>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+        <span style="font-size:14px;font-weight:600;min-width:160px;">Uso do banheiro</span>
+        <div class="sns-buttons" id="sns_banheiro">
+          <button class="sns-btn" onclick="selectSNS('sns_banheiro','Sim',this,null)">Sim</button>
+          <button class="sns-btn" onclick="selectSNS('sns_banheiro','Não',this,null)">Não</button>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+        <span style="font-size:14px;font-weight:600;min-width:160px;">Controle esfincteriano</span>
+        <div class="sns-buttons" id="sns_esfincter">
+          <button class="sns-btn" onclick="selectSNS('sns_esfincter','Sim',this,null)">Sim</button>
+          <button class="sns-btn" onclick="selectSNS('sns_esfincter','Não',this,null)">Não</button>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <span class="check-label-main">Capacidade de locomoção</span>
+    <div class="check-group">
+      <div style="margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">Velocidade ao andar</span>
+        <div class="radio-items">
+          <label class="radio-item" onclick="toggleRadio(this,'vel_andar')"><input type="radio" name="vel_andar" value="Normal"><div class="radio-dot"></div>Normal</label>
+          <label class="radio-item" onclick="toggleRadio(this,'vel_andar')"><input type="radio" name="vel_andar" value="Rápido"><div class="radio-dot"></div>Rápido</label>
+          <label class="radio-item" onclick="toggleRadio(this,'vel_andar')"><input type="radio" name="vel_andar" value="Muito rápido"><div class="radio-dot"></div>Muito rápido</label>
+          <label class="radio-item" onclick="toggleRadio(this,'vel_andar')"><input type="radio" name="vel_andar" value="Lento"><div class="radio-dot"></div>Lento</label>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">Sentar e levantar</span>
+        <div class="radio-items">
+          <label class="radio-item" onclick="toggleRadio(this,'sentar_lev')"><input type="radio" name="sentar_lev" value="Sem ajuda"><div class="radio-dot"></div>Sem ajuda</label>
+          <label class="radio-item" onclick="toggleRadio(this,'sentar_lev')"><input type="radio" name="sentar_lev" value="Com ajuda"><div class="radio-dot"></div>Com ajuda</label>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">Agachar e pegar objetos no chão</span>
+        <div class="radio-items">
+          <label class="radio-item" onclick="toggleRadio(this,'agachar')"><input type="radio" name="agachar" value="Fácil"><div class="radio-dot"></div>Fácil</label>
+          <label class="radio-item" onclick="toggleRadio(this,'agachar')"><input type="radio" name="agachar" value="Difícil"><div class="radio-dot"></div>Difícil</label>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Usa equipamento de auxílio?</span>
+      <div class="check-grid">
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Bengala</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Andador</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Cadeira de rodas</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Nenhum</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 8. Cardiovascular -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">Avaliação Cardiovascular e Respiratória</div>
+  </div>
+  <div class="section-body">
+    <div class="sns-group">
+      <div class="sns-question">Já foi diagnosticado com doenças cardiovasculares ou respiratórias?</div>
+      <div class="sns-buttons" id="sns_cardio">
+        <button class="sns-btn" onclick="selectSNS('sns_cardio','Sim',this,'sub_cardio')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_cardio','Não',this,null)">Não</button>
+        <button class="sns-btn" onclick="selectSNS('sns_cardio','Não sabe',this,null)">Não sabe</button>
+      </div>
+      <div class="sub-field" id="sub_cardio">
+        <label>Quais?</label>
+        <textarea placeholder="Ex: Arritmia, insuficiência cardíaca, DPOC..."></textarea>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-question">Já teve episódios de dor no peito ou palpitações?</div>
+      <div class="sns-buttons" id="sns_dordapeito">
+        <button class="sns-btn" onclick="selectSNS('sns_dordapeito','Sim',this,null)">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_dordapeito','Não',this,null)">Não</button>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Dificuldade para respirar</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'respir')"><input type="radio" name="respir" value="Nenhuma"><div class="radio-dot"></div>Nenhuma</label>
+        <label class="radio-item" onclick="toggleRadio(this,'respir')"><input type="radio" name="respir" value="Leve"><div class="radio-dot"></div>Leve</label>
+        <label class="radio-item" onclick="toggleRadio(this,'respir')"><input type="radio" name="respir" value="Moderada"><div class="radio-dot"></div>Moderada</label>
+        <label class="radio-item" onclick="toggleRadio(this,'respir')"><input type="radio" name="respir" value="Intensa"><div class="radio-dot"></div>Intensa</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-question">Já fez exame cardíaco (ECG, ecocardiograma, ergométrico)?</div>
+      <div class="sns-buttons" id="sns_examecard">
+        <button class="sns-btn" onclick="selectSNS('sns_examecard','Sim',this,'sub_examecard')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_examecard','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_examecard">
+        <label>Qual e quando?</label>
+        <textarea placeholder="Ex: ECG — 2023, Ergométrico — 2022..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 9. Limitações -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">Limitações e Restrições</div>
+  </div>
+  <div class="section-body">
+    <div class="sns-group">
+      <div class="sns-question">Existe condição médica que limite ou impeça a prática de exercícios?</div>
+      <div class="sns-buttons" id="sns_limita">
+        <button class="sns-btn" onclick="selectSNS('sns_limita','Sim',this,'sub_limita')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_limita','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_limita">
+        <label>Qual?</label>
+        <textarea placeholder="Descreva a condição..."></textarea>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-question">Há exercício ou movimento que evita por medo de lesão ou desconforto?</div>
+      <div class="sns-buttons" id="sns_evita">
+        <button class="sns-btn" onclick="selectSNS('sns_evita','Sim',this,'sub_evita')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_evita','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_evita">
+        <label>Qual?</label>
+        <textarea placeholder="Ex: Agachamento, impacto..."></textarea>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-question">Tem recomendação médica para evitar certos tipos de atividades?</div>
+      <div class="sns-buttons" id="sns_restrmed">
+        <button class="sns-btn" onclick="selectSNS('sns_restrmed','Sim',this,'sub_restrmed')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_restrmed','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_restrmed">
+        <label>Qual restrição?</label>
+        <textarea placeholder="Ex: Evitar exercícios de alta intensidade..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10. Psicológica e Social -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">Avaliação Psicológica e Social</div>
+  </div>
+  <div class="section-body">
+    <div class="check-group">
+      <span class="check-label-main">Sintomas emocionais</span>
+      <div class="check-grid">
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Tristeza</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Ansiedade</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Depressão</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Nenhum</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="sns-group">
+      <div class="sns-question">Tem suporte familiar e social?</div>
+      <div class="sns-buttons" id="sns_suporte">
+        <button class="sns-btn" onclick="selectSNS('sns_suporte','Sim',this,null)">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_suporte','Não',this,null)">Não</button>
+      </div>
+    </div>
+    <div class="sns-group">
+      <div class="sns-question">Participa de grupos ou atividades comunitárias?</div>
+      <div class="sns-buttons" id="sns_comunidade">
+        <button class="sns-btn" onclick="selectSNS('sns_comunidade','Sim',this,'sub_comunidade')">Sim</button>
+        <button class="sns-btn" onclick="selectSNS('sns_comunidade','Não',this,null)">Não</button>
+      </div>
+      <div class="sub-field" id="sub_comunidade">
+        <label>Qual atividade?</label>
+        <input type="text" placeholder="Ex: Grupo de caminhada, coral...">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 11. Objetivos -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">Objetivos e Motivação</div>
+  </div>
+  <div class="section-body">
+    <div class="check-group">
+      <span class="check-label-main">Motivação para iniciar</span>
+      <div class="check-grid">
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Recomendação médica</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Atividade em grupo</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Iniciativa própria</label>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Objetivos</span>
+      <div class="check-grid">
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Saúde geral</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Boa forma</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Bem-estar</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Perda de peso</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Diminuir dores</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Ganho de força</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Mobilidade</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Autonomia</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Novos amigos</label>
+      </div>
+    </div>
+    <div class="field-group full" style="margin-top:4px;">
+      <label for="objOutro">Outro objetivo</label>
+      <input type="text" id="objOutro" placeholder="Descreva...">
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Disponibilidade semanal</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'disponib')"><input type="radio" name="disponib" value="2x/semana"><div class="radio-dot"></div>2x/semana</label>
+        <label class="radio-item" onclick="toggleRadio(this,'disponib')"><input type="radio" name="disponib" value="3x/semana"><div class="radio-dot"></div>3x/semana</label>
+        <label class="radio-item" onclick="toggleRadio(this,'disponib')"><input type="radio" name="disponib" value="Todos os dias"><div class="radio-dot"></div>Todos os dias</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 12. Expectativas -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">Expectativas e Preferências</div>
+  </div>
+  <div class="section-body">
+    <div class="check-group">
+      <span class="check-label-main">Exercícios preferidos</span>
+      <div class="check-grid">
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Caminhada</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Esteira</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Bicicleta ergométrica</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Musculação</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Ginástica</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Com música</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Alongamento</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Relaxamento</label>
+      </div>
+    </div>
+    <div class="field-group full" style="margin-top:8px;">
+      <label for="exercOutro">Outro exercício preferido</label>
+      <input type="text" id="exercOutro" placeholder="Ex: Natação, yoga...">
+    </div>
+    <hr class="divider">
+    <div class="field-group full">
+      <label for="exercNGosta">Tipo de exercício que não gosta</label>
+      <input type="text" id="exercNGosta" placeholder="Ex: Corrida, exercícios de solo...">
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Prefere treinar</span>
+      <div class="radio-items">
+        <label class="radio-item" onclick="toggleRadio(this,'grupopref')"><input type="radio" name="grupopref" value="Em grupo"><div class="radio-dot"></div>Em grupo</label>
+        <label class="radio-item" onclick="toggleRadio(this,'grupopref')"><input type="radio" name="grupopref" value="Individual"><div class="radio-dot"></div>Individual</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 13. Auto Imagem -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">Auto Imagem</div>
+  </div>
+  <div class="section-body">
+    <div class="range-group">
+      <label>Nota para o próprio corpo (0 a 10)</label>
+      <div class="nota-label">
+        <span style="font-size:12px;color:#7A9E8B;">0 — muito insatisfeito</span>
+        <div class="range-display" id="notaDisplay">5</div>
+        <span style="font-size:12px;color:#7A9E8B;">10 — muito satisfeito</span>
+      </div>
+      <input type="range" id="notaCorporal" min="0" max="10" value="5" oninput="document.getElementById('notaDisplay').textContent=this.value">
+    </div>
+    <hr class="divider">
+    <div class="check-group">
+      <span class="check-label-main">Partes que gostaria de melhorar</span>
+      <div class="check-grid">
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Braços</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Peito</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Costas</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Abdome</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Coxa</label>
+        <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><div class="check-dot"></div>Glúteos</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 14. Comentários -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">Comentários Adicionais</div>
+  </div>
+  <div class="section-body">
+    <div class="field-group full">
+      <label for="comentarios">Observações livres do avaliador ou do aluno</label>
+      <textarea id="comentarios" class="large" placeholder="Anote informações relevantes não contempladas nos itens acima..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PARTE 1 — SPPB ======================== -->
+
+<div style="margin:32px 0 10px;">
+  <span class="part-label">Parte 1 — SPPB</span>
+</div>
+
+<div class="test-card">
+  <div class="test-header">
+    <h2>SPPB — Short Physical Performance Battery</h2>
+    <p>Bateria de 3 testes que avalia força, equilíbrio e mobilidade. Pontuação total de 0 a 12 pontos.</p>
+  </div>
+  <div class="test-body">
+
+    <!-- SPPB 1 -->
+    <div class="test-info-block">
+      <h4>Teste 1 — Equilíbrio Estático</h4>
+      <p><strong>Objetivo:</strong> Avaliar a estabilidade/equilíbrio estático em diferentes posições.</p>
+      <p style="margin-top:6px;"><strong>Como aplicar:</strong> 3 posições progressivas, cada uma mantida por 10 segundos:</p>
+      <ul style="margin-top:4px;">
+        <li><strong>Pés juntos:</strong> pés lado a lado por 10 s</li>
+        <li><strong>Semi-tandem:</strong> calcanhar de um pé alinhado ao lado da ponta do outro por 10 s</li>
+        <li><strong>Tandem:</strong> um pé diretamente à frente do outro (linha reta) por 10 s</li>
+      </ul>
+    </div>
+
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div class="score-table-wrap">
+      <table class="score-table" id="sppb1_table">
+        <thead><tr><th>Resultado</th><th>Pontos</th></tr></thead>
+        <tbody>
+          <tr onclick="selectRow(this,'sppb1_result','Mantém posição tandem por 10 s','4')"><td>Mantém a posição tandem por 10 segundos</td><td>4 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb1_result','Semi-tandem 10 s, não consegue tandem','3')"><td>Semi-tandem por 10 s, mas não tandem</td><td>3 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb1_result','Pés juntos por 10 s, não semi-tandem','2')"><td>Pés juntos por 10 s, mas não semi-tandem</td><td>2 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb1_result','Pés juntos por menos de 10 s','1')"><td>Pés juntos por menos de 10 segundos</td><td>1 pt</td></tr>
+          <tr onclick="selectRow(this,'sppb1_result','Não mantém equilíbrio em nenhuma posição','0')"><td>Não mantém equilíbrio em nenhuma posição</td><td>0 pts</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="selected-result-display" id="sppb1_result"></div>
+
+    <hr class="divider">
+
+    <!-- SPPB 2 -->
+    <div class="test-info-block">
+      <h4>Teste 2 — Velocidade de Caminhada (4 metros)</h4>
+      <p><strong>Objetivo:</strong> Avaliar a mobilidade e a velocidade de marcha.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cronômetro + fita métrica de 4 metros.</p>
+      <p style="margin-top:4px;"><strong>Como aplicar:</strong> O avaliado caminha 4 metros em seu ritmo habitual. Registrar o tempo em segundos.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sppb2_tempo">Tempo registrado (segundos)</label>
+      <input type="number" id="sppb2_tempo" placeholder="Ex: 5.3" step="0.01" min="0" inputmode="decimal">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div class="score-table-wrap">
+      <table class="score-table" id="sppb2_table">
+        <thead><tr><th>Resultado</th><th>Pontos</th></tr></thead>
+        <tbody>
+          <tr onclick="selectRow(this,'sppb2_result','≤ 4,82 s — 4 pts','4')"><td>Completa em ≤ 4,82 segundos</td><td>4 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb2_result','4,83–6,20 s — 3 pts','3')"><td>Completa entre 4,83 e 6,20 segundos</td><td>3 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb2_result','6,21–8,70 s — 2 pts','2')"><td>Completa entre 6,21 e 8,70 segundos</td><td>2 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb2_result','> 8,70 s — 1 pt','1')"><td>Completa em > 8,70 segundos</td><td>1 pt</td></tr>
+          <tr onclick="selectRow(this,'sppb2_result','Não consegue completar — 0 pts','0')"><td>Não consegue completar</td><td>0 pts</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="selected-result-display" id="sppb2_result"></div>
+
+    <hr class="divider">
+
+    <!-- SPPB 3 -->
+    <div class="test-info-block">
+      <h4>Teste 3 — Força de Membros Inferiores (Cadeira 5×)</h4>
+      <p><strong>Objetivo:</strong> Avaliar a força dos membros inferiores.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cronômetro + cadeira com encosto e sem braços (~43 cm).</p>
+      <p style="margin-top:4px;"><strong>Como aplicar:</strong> Avaliado sentado com braços cruzados sobre o peito. Levantar e sentar da cadeira 5 vezes o mais rápido possível. Registrar o tempo total em segundos.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sppb3_tempo">Tempo registrado (segundos)</label>
+      <input type="number" id="sppb3_tempo" placeholder="Ex: 12.5" step="0.01" min="0" inputmode="decimal">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div class="score-table-wrap">
+      <table class="score-table" id="sppb3_table">
+        <thead><tr><th>Resultado</th><th>Pontos</th></tr></thead>
+        <tbody>
+          <tr onclick="selectRow(this,'sppb3_result','≤ 11,19 s — 4 pts','4')"><td>Completa em ≤ 11,19 segundos</td><td>4 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb3_result','11,20–13,69 s — 3 pts','3')"><td>Completa entre 11,20 e 13,69 segundos</td><td>3 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb3_result','13,70–16,69 s — 2 pts','2')"><td>Completa entre 13,70 e 16,69 segundos</td><td>2 pts</td></tr>
+          <tr onclick="selectRow(this,'sppb3_result','≥ 16,70 s — 1 pt','1')"><td>Completa em ≥ 16,70 segundos</td><td>1 pt</td></tr>
+          <tr onclick="selectRow(this,'sppb3_result','Não consegue realizar 5 rep — 0 pts','0')"><td>Não consegue realizar as cinco repetições</td><td>0 pts</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="selected-result-display" id="sppb3_result"></div>
+
+    <hr class="divider">
+
+    <!-- Interpretação SPPB -->
+    <div class="test-info-block" style="background:#fff3cd;border-left-color:#B7941A;">
+      <h4 style="color:#856404;">Interpretação do Escore Total SPPB</h4>
+      <p style="color:#856404;font-size:13px;">Some os pontos dos 3 testes (máximo 12 pts) e consulte a tabela abaixo.</p>
+    </div>
+    <div class="interp-table-wrap">
+      <table class="interp-table">
+        <thead><tr><th>Pontuação Total</th><th>Interpretação</th></tr></thead>
+        <tbody>
+          <tr><td><span class="classification-badge badge-muitofraco">0–3 pontos</span></td><td>Desempenho físico muito baixo — alta probabilidade de fragilidade e dependência funcional.</td></tr>
+          <tr><td><span class="classification-badge badge-fraco">4–6 pontos</span></td><td>Desempenho físico baixo, sugerindo moderada limitação funcional.</td></tr>
+          <tr><td><span class="classification-badge badge-regular">7–9 pontos</span></td><td>Desempenho físico moderado.</td></tr>
+          <tr><td><span class="classification-badge badge-muitobom">10–12 pontos</span></td><td>Desempenho físico bom, com menores limitações funcionais.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="field-row">
+      <div class="field-group third">
+        <label>Pontuação Total SPPB</label>
+        <input type="number" id="sppb_total" placeholder="0–12" min="0" max="12" inputmode="numeric" readonly style="background:#EEF5FC;font-weight:700;font-size:18px;color:var(--green);text-align:center;">
+      </div>
+      <div class="field-group" style="flex:2">
+        <label for="sppb_interp">Interpretação (automática)</label>
+        <input type="text" id="sppb_interp" placeholder="Calculada automaticamente" readonly style="background:#EEF5FC;font-weight:600;">
+      </div>
+    </div>
+    <div style="background:var(--green-bg);border-radius:10px;padding:14px 16px;margin-bottom:4px;border-left:4px solid var(--green-light);margin-top:2px;">
+      <span style="font-size:12px;color:var(--mid);font-style:italic;">💡 A pontuação e interpretação são calculadas automaticamente ao selecionar os resultados dos 3 testes acima.</span>
+    </div>
+    <div class="field-group full" style="margin-top:14px;">
+      <label for="sppb_obs">Observações SPPB</label>
+      <textarea id="sppb_obs" placeholder="Anote condições do teste, intercorrências, comportamento do aluno..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PARTE 2 — SFT ======================== -->
+
+<div style="margin:32px 0 10px;">
+  <span class="part-label">Parte 2 — SFT</span>
+</div>
+
+<div class="test-card">
+  <div class="test-header">
+    <h2>SFT — Senior Fitness Test</h2>
+    <p>Avalia capacidade funcional e aptidão física: força, flexibilidade, agilidade, equilíbrio e resistência aeróbia.</p>
+  </div>
+  <div class="test-body">
+
+    <!-- Seletor de sexo global SFT -->
+    <div style="margin-bottom:18px;">
+      <span class="check-label-main">Sexo do aluno (para tabelas SFT)</span>
+      <div class="gender-toggle">
+        <button class="gender-btn active" id="sft_fem" onclick="setSFTGender('F')">Feminino</button>
+        <button class="gender-btn" id="sft_mas" onclick="setSFTGender('M')">Masculino</button>
+      </div>
+    </div>
+
+    <!-- SFT 1 -->
+    <div class="test-info-block">
+      <h4>Teste 1 — Força de Membros Inferiores (Chair Stand Test)</h4>
+      <p><strong>Objetivo:</strong> Avaliar força e resistência dos membros inferiores.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cronômetro + cadeira com encosto e sem braços (~43 cm) encostada na parede.</p>
+      <p style="margin-top:4px;"><strong>Posição:</strong> Sentado com costas no encosto, pés no chão, braços cruzados (dedos médios no acrômio).</p>
+      <p style="margin-top:4px;"><strong>Procedimento:</strong> Ao sinal, levantar completamente e sentar o máximo de vezes em 30 segundos. Se estiver subindo ao final do tempo, conta como repetição.</p>
+      <p style="margin-top:4px;"><strong>Pontuação:</strong> Número total de repetições em 30 segundos.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sft1_reps">Repetições realizadas</label>
+      <input type="number" id="sft1_reps" placeholder="Ex: 16" min="0" inputmode="numeric">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+
+    <!-- Tabela Mulheres -->
+    <div id="sft1_tabF">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Mulheres — repetições em 30 s</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft1_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥21</td><td>≥20</td><td>≥19</td><td>≥19</td><td>≥17</td><td>≥16</td><td>≥15</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>18–20</td><td>17–19</td><td>17–18</td><td>16–18</td><td>15–16</td><td>14–15</td><td>12–15</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>16–17</td><td>15–16</td><td>14–16</td><td>13–15</td><td>13–14</td><td>12–13</td><td>11–12</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>13–15</td><td>13–14</td><td>12–13</td><td>11–13</td><td>11–12</td><td>10–11</td><td>9–10</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤12</td><td>≤12</td><td>≤11</td><td>≤10</td><td>≤10</td><td>≤9</td><td>≤8</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Tabela Homens -->
+    <div id="sft1_tabM" style="display:none;">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Homens — repetições em 30 s</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft1_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥21</td><td>≥20</td><td>≥19</td><td>≥19</td><td>≥17</td><td>≥16</td><td>≥14</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>18–20</td><td>17–19</td><td>17–18</td><td>16–18</td><td>14–16</td><td>13–15</td><td>11–13</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>16–17</td><td>15–16</td><td>14–16</td><td>14–15</td><td>12–13</td><td>11–12</td><td>9–11</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>14–15</td><td>12–14</td><td>12–13</td><td>11–13</td><td>10–11</td><td>8–10</td><td>8–9</td></tr>
+            <tr onclick="selectRow(this,'sft1_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤13</td><td>≤11</td><td>≤11</td><td>≤10</td><td>≤9</td><td>≤7</td><td>≤7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="selected-result-display" id="sft1_result"></div>
+
+    <hr class="divider">
+
+    <!-- SFT 2 -->
+    <div class="test-info-block">
+      <h4>Teste 2 — Força de Membros Superiores (Arm Curl Test)</h4>
+      <p><strong>Objetivo:</strong> Avaliar a resistência de força dos membros superiores.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cronômetro + cadeira sem braços + halter (2,3 kg mulheres / 3,6 kg homens).</p>
+      <p style="margin-top:4px;"><strong>Posição:</strong> Sentado, halter na mão dominante ao lado do corpo.</p>
+      <p style="margin-top:4px;"><strong>Procedimento:</strong> Ao sinal, realizar flexões do antebraço o máximo de vezes em 30 segundos. Se o antebraço estiver em meia flexão no final, conta como repetição.</p>
+      <p style="margin-top:4px;"><strong>Pontuação:</strong> Número total de repetições em 30 segundos.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sft2_reps">Repetições realizadas</label>
+      <input type="number" id="sft2_reps" placeholder="Ex: 18" min="0" inputmode="numeric">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div id="sft2_tabF">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Mulheres — repetições em 30 s</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft2_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥22</td><td>≥21</td><td>≥20</td><td>≥19</td><td>≥18</td><td>≥17</td><td>≥15</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>19–21</td><td>18–20</td><td>17–19</td><td>17–18</td><td>15–17</td><td>14–16</td><td>12–14</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>16–18</td><td>15–17</td><td>15–16</td><td>14–16</td><td>12–14</td><td>11–13</td><td>10–11</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>14–15</td><td>12–14</td><td>12–14</td><td>11–13</td><td>10–11</td><td>8–10</td><td>7–9</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤13</td><td>≤11</td><td>≤11</td><td>≤10</td><td>≤9</td><td>≤7</td><td>≤6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="sft2_tabM" style="display:none;">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Homens — repetições em 30 s</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft2_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥24</td><td>≥24</td><td>≥23</td><td>≥21</td><td>≥21</td><td>≥18</td><td>≥16</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>21–23</td><td>21–23</td><td>20–22</td><td>18–20</td><td>18–20</td><td>16–17</td><td>14–15</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>19–20</td><td>18–20</td><td>17–19</td><td>16–17</td><td>15–17</td><td>14–15</td><td>12–13</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>16–18</td><td>15–17</td><td>14–16</td><td>13–15</td><td>13–15</td><td>11–13</td><td>10–11</td></tr>
+            <tr onclick="selectRow(this,'sft2_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤15</td><td>≤14</td><td>≤13</td><td>≤12</td><td>≤12</td><td>≤10</td><td>≤9</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="selected-result-display" id="sft2_result"></div>
+
+    <hr class="divider">
+
+    <!-- SFT 3 -->
+    <div class="test-info-block">
+      <h4>Teste 3 — Flexibilidade de Membros Inferiores (Chair Sit-and-Reach)</h4>
+      <p><strong>Objetivo:</strong> Avaliar a mobilidade/flexibilidade dos membros inferiores.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cadeira (~43 cm) encostada na parede + régua de 30/45 cm.</p>
+      <p style="margin-top:4px;"><strong>Posição:</strong> Sentado na borda da cadeira, uma perna estendida (calcanhar no chão, pé em dorsiflexão ~90°), a outra dobrada com pé no chão.</p>
+      <p style="margin-top:4px;"><strong>Procedimento:</strong> Mãos sobrepostas, inclinar lentamente para frente tentando tocar os dedos dos pés. Manter 2 segundos. 2 tentativas de aprendizagem + 2 de teste.</p>
+      <p style="margin-top:4px;"><strong>Pontuação:</strong> Distância em cm: (−) = não alcançou; (+) = ultrapassou. Melhor resultado.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sft3_dist">Distância (cm) — use − para negativo</label>
+      <input type="text" id="sft3_dist" placeholder="Ex: +5 ou -3">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓ (Mulheres)</div>
+    <div id="sft3_tabF">
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft3_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥21</td><td>≥20</td><td>≥19</td><td>≥19</td><td>≥17</td><td>≥16</td><td>≥15</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>18–20</td><td>17–19</td><td>17–18</td><td>16–18</td><td>15–16</td><td>14–15</td><td>12–15</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>16–17</td><td>15–16</td><td>14–16</td><td>13–15</td><td>13–14</td><td>12–13</td><td>11–12</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>13–15</td><td>13–14</td><td>12–13</td><td>11–13</td><td>11–12</td><td>10–11</td><td>9–10</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤12</td><td>≤12</td><td>≤11</td><td>≤10</td><td>≤10</td><td>≤9</td><td>≤8</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="sft3_tabM" style="display:none;">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Homens (cm)</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft3_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥0,7</td><td>≥0,1</td><td>≥-0,3</td><td>≥-1,2</td><td>≥-1,1</td><td>≥-2,1</td><td>≥-3,1</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>-2,1/0,6</td><td>-2,8/0</td><td>-3,2/-0,4</td><td>-4,2/-1,3</td><td>-4,2/-1,2</td><td>-4,9/-2,2</td><td>-5,9/-3,2</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>-4,5/-2,2</td><td>-5,2/-2,9</td><td>-5,6/-3,3</td><td>-6,8/-4,3</td><td>-7,0/-4,3</td><td>-7,3/-5,0</td><td>-8,3/-6,0</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>-7,3/-4,6</td><td>-8,1/-5,3</td><td>-8,5/-5,7</td><td>-9,8/-6,9</td><td>-10,4/-7,1</td><td>-10/-7,4</td><td>-11,1/-8,4</td></tr>
+            <tr onclick="selectRow(this,'sft3_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤-7,4</td><td>≤-8,2</td><td>≤-8,6</td><td>≤-9,9</td><td>≤-10,5</td><td>≤-10,2</td><td>≤-11,2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="selected-result-display" id="sft3_result"></div>
+
+    <hr class="divider">
+
+    <!-- SFT 4 -->
+    <div class="test-info-block">
+      <h4>Teste 4 — Agilidade e Equilíbrio Dinâmico (TUG Test)</h4>
+      <p><strong>Objetivo:</strong> Avaliar velocidade, agilidade e equilíbrio dinâmico.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cronômetro + fita métrica + cone + cadeira (~43 cm) encostada na parede.</p>
+      <p style="margin-top:4px;"><strong>Montagem:</strong> Posicionar o cone a 2,44 m da ponta da cadeira; deixar 1,22 m livres ao redor do cone.</p>
+      <p style="margin-top:4px;"><strong>Posição:</strong> Avaliado sentado, postura ereta, mãos nas coxas, pés no chão (um ligeiramente à frente).</p>
+      <p style="margin-top:4px;"><strong>Procedimento:</strong> Ao sinal: levantar, caminhar até o cone o mais rápido possível (sem correr), contornar e voltar a sentar. Cronômetro para quando sentar completamente. 1 tentativa de prática + 2 de teste.</p>
+      <p style="margin-top:4px;"><strong>Pontuação:</strong> Melhor tempo (menor) das duas tentativas, em segundos.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sft4_tempo">Melhor tempo (segundos)</label>
+      <input type="number" id="sft4_tempo" placeholder="Ex: 6.2" step="0.01" min="0" inputmode="decimal">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div id="sft4_tabF">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Mulheres — segundos (menor = melhor)</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft4_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≤4,1</td><td>≤4,5</td><td>≤4,6</td><td>≤4,9</td><td>≤5,3</td><td>≤5,7</td><td>≤6,6</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>4,2–4,8</td><td>4,6–5,2</td><td>4,7–5,5</td><td>5,0–5,8</td><td>5,4–6,6</td><td>5,8–7,2</td><td>6,7–8,5</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>4,9–5,4</td><td>5,3–5,8</td><td>5,6–6,3</td><td>5,9–6,6</td><td>6,7–7,7</td><td>7,3–8,4</td><td>8,6–10,1</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>5,5–6,1</td><td>5,9–6,5</td><td>6,4–7,2</td><td>6,7–7,5</td><td>7,8–8,9</td><td>8,5–9,9</td><td>10,2–12</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≥6,2</td><td>≥6,6</td><td>≥7,3</td><td>≥7,6</td><td>≥9,0</td><td>≥10</td><td>≥12,1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="sft4_tabM" style="display:none;">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Homens — segundos (menor = melhor)</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft4_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≤3,5</td><td>≤4,0</td><td>≤4,1</td><td>≤4,2</td><td>≤4,8</td><td>≤4,9</td><td>≤5,6</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>3,6–4,3</td><td>4,1–4,7</td><td>4,2–4,9</td><td>4,3–5,3</td><td>4,9–5,9</td><td>5,0–6,4</td><td>5,7–7,3</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>4,4–4,9</td><td>4,8–5,3</td><td>5,0–5,5</td><td>5,4–6,3</td><td>6,0–6,8</td><td>6,5–7,8</td><td>7,4–8,7</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>5,0–5,7</td><td>5,4–6,0</td><td>5,6–6,3</td><td>6,4–7,4</td><td>6,9–7,8</td><td>7,9–9,3</td><td>8,8–10,4</td></tr>
+            <tr onclick="selectRow(this,'sft4_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≥5,8</td><td>≥6,1</td><td>≥6,4</td><td>≥7,5</td><td>≥7,9</td><td>≥9,4</td><td>≥10,5</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="selected-result-display" id="sft4_result"></div>
+
+    <hr class="divider">
+
+    <!-- SFT 5 -->
+    <div class="test-info-block">
+      <h4>Teste 5 — Flexibilidade de Membros Superiores (Back Scratch Test)</h4>
+      <p><strong>Objetivo:</strong> Avaliar a mobilidade/flexibilidade dos ombros.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Régua de 30/45 cm.</p>
+      <p style="margin-top:4px;"><strong>Posição:</strong> Avaliado em pé, avaliador atrás.</p>
+      <p style="margin-top:4px;"><strong>Procedimento:</strong> Mão preferida por cima do ombro (palma aberta, cúbito para cima), alcançando as costas. Outra mão por baixo (palma para cima), tentando tocar ou sobrepor os dedos médios. 2 tentativas de aprendizagem + 2 de teste.</p>
+      <p style="margin-top:4px;"><strong>Pontuação:</strong> Distância em cm entre os dedos médios: (−) = não se tocaram; (+) = sobreposição. Melhor resultado.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sft5_dist">Distância (cm)</label>
+      <input type="text" id="sft5_dist" placeholder="Ex: -2,5 ou +1,0">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div id="sft5_tabF">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Mulheres (cm)</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft5_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥2,0</td><td>≥2,0</td><td>≥1,6</td><td>≥1,4</td><td>≥1,0</td><td>≥0,0</td><td>≥0,0</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>0,3/1,9</td><td>-0,2/1,9</td><td>-0,7/1,5</td><td>-1,0/1,3</td><td>-1,5/0,9</td><td>-2,7/-0,1</td><td>-3,1/-0,1</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>-1,5/0,2</td><td>-2,0/0,3</td><td>-2,5/-0,8</td><td>-3,0/-1,1</td><td>-3,6/-1,6</td><td>-4,9/-2,8</td><td>-5,7/-3,2</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>-3,5/-1,6</td><td>-4,2/-2,1</td><td>-4,8/-2,6</td><td>-5,4/-3,1</td><td>-6,0/-3,7</td><td>-7,6/-5,0</td><td>-8,8/-5,8</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤-3,6</td><td>≤-4,3</td><td>≤-4,9</td><td>≤-5,5</td><td>≤-6,1</td><td>≤-7,7</td><td>≤-8,9</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="sft5_tabM" style="display:none;">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Homens (cm)</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft5_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥0,7</td><td>≥0,1</td><td>≥-0,3</td><td>≥-1,2</td><td>≥-1,1</td><td>≥-2,1</td><td>≥-3,1</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>-2,1/0,6</td><td>-2,8/0</td><td>-3,2/-0,4</td><td>-4,2/-1,3</td><td>-4,2/-1,2</td><td>-4,9/-2,2</td><td>-5,9/-3,2</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>-4,5/-2,2</td><td>-5,2/-2,9</td><td>-5,6/-3,3</td><td>-6,8/-4,3</td><td>-7,0/-4,3</td><td>-7,3/-5,0</td><td>-8,3/-6,0</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>-7,3/-4,6</td><td>-8,1/-5,3</td><td>-8,5/-5,7</td><td>-9,8/-6,9</td><td>-10,4/-7,1</td><td>-10/-7,4</td><td>-11,1/-8,4</td></tr>
+            <tr onclick="selectRow(this,'sft5_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤-7,4</td><td>≤-8,2</td><td>≤-8,6</td><td>≤-9,9</td><td>≤-10,5</td><td>≤-10,2</td><td>≤-11,2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="selected-result-display" id="sft5_result"></div>
+
+    <hr class="divider">
+
+    <!-- SFT 6 -->
+    <div class="test-info-block">
+      <h4>Teste 6 — Resistência Aeróbia (Caminhada de 6 Minutos)</h4>
+      <p><strong>Objetivo:</strong> Avaliar a resistência aeróbia (endurance cardiopulmonar).</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cronômetro + fita métrica + cones + giz/marcador. Na academia: esteira.</p>
+      <p style="margin-top:4px;"><strong>Montagem (sem esteira):</strong> Percurso de 45,7 m marcado em segmentos de 4,57 m. Cadeiras ao longo do percurso para segurança.</p>
+      <p style="margin-top:4px;"><strong>Procedimento:</strong> Caminhar o mais rápido possível (sem correr) durante 6 minutos. Pode parar e descansar se necessário. Interromper se: tontura, dor, náuseas ou fadiga excessiva. Ao final, caminhar lentamente por ~1 minuto.</p>
+      <p style="margin-top:4px;"><strong>Sugestão Longev:</strong> Registrar Escala de Borg (0–10) e FC ao final e após 1 min de recuperação.</p>
+    </div>
+    <div class="field-row">
+      <div class="field-group third">
+        <label for="sft6_metros">Distância percorrida (metros)</label>
+        <input type="number" id="sft6_metros" placeholder="Ex: 540" min="0" inputmode="numeric">
+      </div>
+      <div class="field-group third">
+        <label for="sft6_borg">Escala de Borg final (0–10)</label>
+        <input type="number" id="sft6_borg" placeholder="0–10" min="0" max="10" inputmode="numeric">
+      </div>
+      <div class="field-group third">
+        <label for="sft6_fc">FC após 1 min recuperação (bpm)</label>
+        <input type="tel" id="sft6_fc" placeholder="Ex: 88" inputmode="numeric">
+      </div>
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div id="sft6_tabF">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Mulheres (metros)</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft6_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥675</td><td>≥654</td><td>≥631</td><td>≥606</td><td>≥561</td><td>≥535</td><td>≥464</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>625–674</td><td>594–653</td><td>573–630</td><td>539–605</td><td>492–560</td><td>459–534</td><td>389–463</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>583–624</td><td>544–593</td><td>525–572</td><td>481–538</td><td>434–491</td><td>395–458</td><td>327–388</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>533–582</td><td>484–543</td><td>467–524</td><td>414–480</td><td>365–433</td><td>319–394</td><td>252–326</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤532</td><td>≤483</td><td>≤466</td><td>≤413</td><td>≤364</td><td>≤318</td><td>≤251</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="sft6_tabM" style="display:none;">
+      <div style="font-size:12px;color:var(--mid);font-weight:600;margin-bottom:6px;">Homens (metros)</div>
+      <div class="score-table-wrap">
+        <table class="score-table">
+          <thead><tr><th>Classificação</th><th>60–64</th><th>65–69</th><th>70–74</th><th>75–79</th><th>80–84</th><th>85–89</th><th>90–94</th></tr></thead>
+          <tbody>
+            <tr onclick="selectRow(this,'sft6_result','Muito bom','Muito bom')"><td><span class="classification-badge badge-muitobom">Muito bom</span></td><td>≥752</td><td>≥719</td><td>≥699</td><td>≥662</td><td>≥626</td><td>≥597</td><td>≥498</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Bom','Bom')"><td><span class="classification-badge badge-bom">Bom</span></td><td>698–751</td><td>658–718</td><td>639–698</td><td>587–661</td><td>555–625</td><td>513–596</td><td>421–497</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Regular','Regular')"><td><span class="classification-badge badge-regular">Regular</span></td><td>652–697</td><td>606–657</td><td>587–638</td><td>525–586</td><td>495–554</td><td>443–512</td><td>357–420</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Fraco','Fraco')"><td><span class="classification-badge badge-fraco">Fraco</span></td><td>598–651</td><td>545–605</td><td>527–586</td><td>450–524</td><td>424–494</td><td>359–442</td><td>280–356</td></tr>
+            <tr onclick="selectRow(this,'sft6_result','Muito fraco','Muito fraco')"><td><span class="classification-badge badge-muitofraco">Muito fraco</span></td><td>≤597</td><td>≤544</td><td>≤526</td><td>≤449</td><td>≤423</td><td>≤358</td><td>≤279</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="selected-result-display" id="sft6_result"></div>
+
+    <hr class="divider">
+
+    <!-- SFT 7 -->
+    <div class="test-info-block">
+      <h4>Teste 7 — Equilíbrio Estático Unipodal</h4>
+      <p><strong>Objetivo:</strong> Avaliar o equilíbrio postural e controle motor; identificar risco de quedas.</p>
+      <p style="margin-top:6px;"><strong>Materiais:</strong> Cronômetro + ambiente seguro com apoio próximo (parede ou cadeira).</p>
+      <p style="margin-top:4px;"><strong>Procedimento:</strong> Avaliado em pé, levanta um pé e mantém o equilíbrio sobre o outro. Pode ser realizado com olhos abertos e/ou fechados. Cronometrar o tempo que consegue manter a posição.</p>
+      <p style="margin-top:4px;"><strong>Pontuação:</strong> Tempo em segundos mantido na posição unipodal.</p>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="sft7_tempo">Tempo (segundos)</label>
+      <input type="number" id="sft7_tempo" placeholder="Ex: 18" step="0.1" min="0" inputmode="decimal">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div class="unipodal-table-wrap">
+      <table class="unipodal-table">
+        <thead><tr><th>Faixa Etária</th><th>Excelente</th><th>Bom</th><th>Moderado</th><th>Baixo</th></tr></thead>
+        <tbody>
+          <tr onclick="selectRow(this,'sft7_result','20–49 anos','')"><td>20–49 anos</td><td>&gt;30 s</td><td>15–30 s</td><td>5–14 s</td><td>&lt;5 s</td></tr>
+          <tr onclick="selectRow(this,'sft7_result','50–59 anos','')"><td>50–59 anos</td><td>&gt;25 s</td><td>10–25 s</td><td>3–9 s</td><td>&lt;3 s</td></tr>
+          <tr onclick="selectRow(this,'sft7_result','60–69 anos','')"><td>60–69 anos</td><td>&gt;20 s</td><td>8–20 s</td><td>3–7 s</td><td>&lt;3 s</td></tr>
+          <tr onclick="selectRow(this,'sft7_result','70–79 anos','')"><td>70–79 anos</td><td>&gt;15 s</td><td>5–15 s</td><td>2–4 s</td><td>&lt;2 s</td></tr>
+          <tr onclick="selectRow(this,'sft7_result','80+ anos','')"><td>80+ anos</td><td>&gt;10 s</td><td>5–10 s</td><td>2–4 s</td><td>&lt;2 s</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="field-group full" style="margin-bottom:14px;">
+      <label style="margin-bottom:8px;display:block;">Classificação obtida — selecione uma opção</label>
+
+      <!-- Suggestion box: appears when tests 1-6 have been selected -->
+      <div id="sft_sugestao_box" style="display:none; margin-bottom:14px; background:#F0F6FF; border:2px solid #2563A8; border-radius:12px; padding:16px 18px;">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;color:#2563A8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">
+          🔍 Sugestão com base nos resultados selecionados
+        </div>
+        <div id="sft_sugestao_texto" style="font-size:14px;color:#0F2236;line-height:1.65;font-weight:500;margin-bottom:10px;"></div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:#3A5270;text-transform:uppercase;letter-spacing:0.5px;">
+          Classificação sugerida: <span id="sft_sugestao_badge" style="display:inline-block;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:800;margin-left:4px;"></span>
+        </div>
+      </div>
+
+      <div class="radio-items" id="sft7_cl_group">
+        <label class="radio-item" onclick="toggleRadio(this,'sft7_cl')"><input type="radio" name="sft7_cl" value="Excelente"><div class="radio-dot"></div>Excelente</label>
+        <label class="radio-item" onclick="toggleRadio(this,'sft7_cl')"><input type="radio" name="sft7_cl" value="Bom"><div class="radio-dot"></div>Bom</label>
+        <label class="radio-item" onclick="toggleRadio(this,'sft7_cl')"><input type="radio" name="sft7_cl" value="Moderado"><div class="radio-dot"></div>Moderado</label>
+        <label class="radio-item" onclick="toggleRadio(this,'sft7_cl')"><input type="radio" name="sft7_cl" value="Baixo"><div class="radio-dot"></div>Baixo</label>
+      </div>
+    </div>
+    <div class="selected-result-display" id="sft7_result"></div>
+    <div class="field-group full" style="margin-top:14px;">
+      <label>Observação do profissional</label>
+      <textarea id="sft7_obs" placeholder="Olhos abertos/fechados, uso de apoio, instabilidade observada, contexto clínico..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PARTE 3 — PREENSÃO MANUAL ======================== -->
+
+<div style="margin:32px 0 10px;">
+  <span class="part-label">Parte 3 — Preensão Manual</span>
+</div>
+
+<div class="test-card">
+  <div class="test-header">
+    <h2>Teste de Preensão Manual</h2>
+    <p>Avalia a força de preensão em kg e sua relação com risco de sarcopenia.</p>
+  </div>
+  <div class="test-body">
+    <div class="test-info-block">
+      <h4>Protocolo</h4>
+      <p><strong>Materiais:</strong> Dinamômetro manual ajustável.</p>
+      <p style="margin-top:6px;"><strong>Procedimento:</strong> Realizar 3 tentativas com a mão dominante. Registrar o maior valor obtido em kg.</p>
+    </div>
+    <div class="field-row">
+      <div class="field-group third">
+        <label for="preen_t1">Tentativa 1 (kg)</label>
+        <input type="number" id="preen_t1" placeholder="Ex: 28" step="0.1" min="0" inputmode="decimal">
+      </div>
+      <div class="field-group third">
+        <label for="preen_t2">Tentativa 2 (kg)</label>
+        <input type="number" id="preen_t2" placeholder="Ex: 30" step="0.1" min="0" inputmode="decimal">
+      </div>
+      <div class="field-group third">
+        <label for="preen_t3">Tentativa 3 (kg)</label>
+        <input type="number" id="preen_t3" placeholder="Ex: 29" step="0.1" min="0" inputmode="decimal">
+      </div>
+    </div>
+    <div class="field-group" style="max-width:220px;margin-bottom:14px;">
+      <label for="preen_melhor">Maior valor (kg)</label>
+      <input type="number" id="preen_melhor" placeholder="Ex: 30" step="0.1" min="0" inputmode="decimal">
+    </div>
+    <div class="score-section-title">Clique na linha do resultado do aluno ↓</div>
+    <div class="preen-table-wrap">
+      <table class="preen-table">
+        <thead><tr><th>Faixa Etária</th><th>Classificação</th><th>Homens (kg)</th><th>Mulheres (kg)</th><th>Relação com Sarcopenia</th></tr></thead>
+        <tbody>
+          <tr onclick="selectRow(this,'preen_result','60–69 anos — Normal (H ≥30 / M ≥20)','Normal')"><td>60–69 anos</td><td><span class="classification-badge badge-muitobom">Normal</span></td><td>≥30</td><td>≥20</td><td>Força adequada; baixo risco.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','60–69 anos — Baixo Risco (H 27–29 / M 16–19)','Baixo Risco')"><td>60–69 anos</td><td><span class="classification-badge badge-regular">Baixo Risco</span></td><td>27–29</td><td>16–19</td><td>Atenção e monitoramento.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','60–69 anos — Indicativo de Sarcopenia (H &lt;27 / M &lt;16)','Sarcopenia')"><td>60–69 anos</td><td><span class="classification-badge badge-muitofraco">Indicativo</span></td><td>&lt;27</td><td>&lt;16</td><td>Risco alto; intervenção necessária.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','70–79 anos — Normal (H ≥28 / M ≥18)','Normal')"><td>70–79 anos</td><td><span class="classification-badge badge-muitobom">Normal</span></td><td>≥28</td><td>≥18</td><td>Força adequada; menor risco.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','70–79 anos — Baixo Risco (H 25–27 / M 14–17)','Baixo Risco')"><td>70–79 anos</td><td><span class="classification-badge badge-regular">Baixo Risco</span></td><td>25–27</td><td>14–17</td><td>Atenção e monitoramento.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','70–79 anos — Indicativo de Sarcopenia (H &lt;25 / M &lt;14)','Sarcopenia')"><td>70–79 anos</td><td><span class="classification-badge badge-muitofraco">Indicativo</span></td><td>&lt;25</td><td>&lt;14</td><td>Risco elevado; avaliação completa.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','80+ anos — Normal (H ≥26 / M ≥16)','Normal')"><td>80+ anos</td><td><span class="classification-badge badge-muitobom">Normal</span></td><td>≥26</td><td>≥16</td><td>Força adequada; menor risco.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','80+ anos — Baixo Risco (H 23–25 / M 12–15)','Baixo Risco')"><td>80+ anos</td><td><span class="classification-badge badge-regular">Baixo Risco</span></td><td>23–25</td><td>12–15</td><td>Atenção e monitoramento.</td></tr>
+          <tr onclick="selectRow(this,'preen_result','80+ anos — Indicativo de Sarcopenia (H &lt;23 / M &lt;12)','Sarcopenia')"><td>80+ anos</td><td><span class="classification-badge badge-muitofraco">Indicativo</span></td><td>&lt;23</td><td>&lt;12</td><td>Provável sarcopenia. Intervenção necessária.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="selected-result-display" id="preen_result"></div>
+
+    <hr class="divider">
+    <div class="field-group full">
+      <label for="preen_obs">Observações da Preensão Manual</label>
+      <textarea id="preen_obs" placeholder="Anotações sobre lateralidade, condição da mão, interferências..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- SAVE -->
+<div class="save-section">
+  <button class="btn-save" onclick="salvarAvaliacao()">💾 &nbsp;Salvar Avaliação</button>
+  <div class="post-save" id="postSave">
+    <button class="btn-report" onclick="abrirRelatorio()">📋 &nbsp;Relatório</button>
+    <button class="btn-new" onclick="novaAvaliacao()">➕ &nbsp;Nova Avaliação</button>
+  </div>
+</div>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Avaliação salva com sucesso!</div>
+
+<!-- MODAL RELATÓRIO -->
+<div class="modal-overlay" id="modalRelatorio">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>📋 Relatório da Avaliação</h2>
+      <button class="modal-close" onclick="fecharRelatorio()">✕</button>
+    </div>
+    <div class="modal-body" id="modalContent">
+      <!-- gerado dinamicamente -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ TOGGLE CHECKBOXES ============
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+// ============ TOGGLE RADIO ============
+function toggleRadio(el, name) {
+  document.querySelectorAll(`[name="${name}"]`).forEach(inp => {
+    inp.closest('.radio-item').classList.remove('selected');
+  });
+  el.classList.add('selected');
+}
+
+// ============ SIM / NÃO / NÃO SABE ============
+function selectSNS(groupId, val, btn, subId) {
+  const btns = document.getElementById(groupId).querySelectorAll('.sns-btn');
+  btns.forEach(b => b.className = 'sns-btn');
+  if (val === 'Sim') btn.classList.add('selected-sim');
+  else if (val === 'Não') btn.classList.add('selected-nao');
+  else if (val === 'Já fez uso') { btn.classList.add('selected-naosabe'); }
+  else btn.classList.add('selected-naosabe');
+
+  if (subId) {
+    const sub = document.getElementById(subId);
+    if (sub) sub.classList.toggle('visible', val === 'Sim' || val === 'Já fez uso');
+  }
+}
+
+// ============ TABLE ROW SELECTION ============
+// score map for suggestion logic
+const scoreMap = { 'Muito bom': 4, 'Bom': 3, 'Regular': 2, 'Fraco': 1, 'Muito fraco': 0 };
+const sftResults = {}; // stores label per test id
+
+function selectRow(row, resultId, label, pts) {
+  const table = row.closest('table');
+  table.querySelectorAll('tbody tr').forEach(r => r.classList.remove('row-selected'));
+  row.classList.add('row-selected');
+
+  const display = document.getElementById(resultId);
+  if (display) {
+    display.classList.add('visible');
+    if (pts !== '') {
+      display.innerHTML = `<p>Resultado selecionado: <span>${label}</span> &nbsp;|&nbsp; Pontuação: <span>${pts} pt(s)</span></p>`;
+    } else {
+      display.innerHTML = `<p>Selecionado: <span>${label}</span></p>`;
+    }
+  }
+  // SPPB auto calc
+  if (['sppb1_result','sppb2_result','sppb3_result'].includes(resultId)) {
+    calcSPPB();
+  }
+  // Track SFT results and update suggestion when enough data exists
+  const sftMap = { sft1_result:'sft1', sft2_result:'sft2', sft3_result:'sft3',
+                   sft4_result:'sft4', sft5_result:'sft5', sft6_result:'sft6' };
+  if (sftMap[resultId]) {
+    sftResults[sftMap[resultId]] = label;
+    updateSFTSugestao();
+  }
+}
+
+// ============ SFT CLASSIFICATION SUGGESTION ============
+function updateSFTSugestao() {
+  const box = document.getElementById('sft_sugestao_box');
+  const texto = document.getElementById('sft_sugestao_texto');
+  const badge = document.getElementById('sft_sugestao_badge');
+  if (!box || !texto || !badge) return;
+
+  const keys = ['sft1','sft2','sft3','sft4','sft5','sft6'];
+  const selected = keys.filter(k => sftResults[k]);
+
+  // Only show suggestion when at least 3 tests have been filled
+  if (selected.length < 3) { box.style.display = 'none'; return; }
+
+  // Calculate weighted average score
+  const scores = selected.map(k => scoreMap[sftResults[k]] ?? 2);
+  const avg = scores.reduce((a,b) => a+b, 0) / scores.length;
+
+  // Identify standout weak or strong areas
+  const weakTests = {
+    sft1: 'força de membros inferiores', sft2: 'força de membros superiores',
+    sft3: 'flexibilidade de MMII', sft4: 'agilidade e equilíbrio dinâmico',
+    sft5: 'flexibilidade de ombros', sft6: 'resistência aeróbia'
+  };
+  const veryWeak = selected.filter(k => (scoreMap[sftResults[k]] ?? 2) <= 1);
+  const weak = selected.filter(k => (scoreMap[sftResults[k]] ?? 2) === 2);
+  const good = selected.filter(k => (scoreMap[sftResults[k]] ?? 2) >= 3);
+
+  // Determine suggested classification
+  let sugestao, cor, corTexto, justificativa;
+
+  if (avg >= 3.3) {
+    sugestao = 'Excelente';
+    cor = '#C3F5D4'; corTexto = '#1A5E36';
+    justificativa = `Os resultados indicam aptidão física muito acima da média para a faixa etária, com predominância de classificações "Bom" e "Muito bom" nos testes realizados.`;
+  } else if (avg >= 2.5) {
+    sugestao = 'Bom';
+    cor = '#D6E8F8'; corTexto = '#1A3A5C';
+    const destaque = weak.length > 0
+      ? ` Atenção para ${weak.map(k=>weakTests[k]).join(' e ')}, onde o desempenho foi regular.`
+      : '';
+    justificativa = `Capacidade funcional geral dentro do esperado para a faixa etária, com a maioria dos testes em nível satisfatório.${destaque}`;
+  } else if (avg >= 1.5) {
+    sugestao = 'Moderado';
+    cor = '#FFF3CD'; corTexto = '#856404';
+    const destWeak = veryWeak.length > 0
+      ? ` Destaque para baixo desempenho em: ${veryWeak.map(k=>weakTests[k]).join(', ')}.`
+      : '';
+    justificativa = `Desempenho funcional abaixo do esperado em vários testes, sugerindo limitações que merecem atenção no planejamento do exercício.${destWeak}`;
+  } else {
+    sugestao = 'Baixo';
+    cor = '#FFCDD2'; corTexto = '#B71C1C';
+    const criticos = veryWeak.map(k=>weakTests[k]).join(', ');
+    justificativa = `Desempenho funcional geral muito abaixo do esperado para a faixa etária${criticos ? `, com déficits críticos em: ${criticos}` : ''}. Intervenção estruturada e supervisão próxima são prioritárias.`;
+  }
+
+  // Add note about missing tests
+  const missing = keys.filter(k => !sftResults[k]);
+  const nota = missing.length > 0
+    ? ` <em style="color:#7A9E8B;font-size:12px;">(${missing.length} teste${missing.length>1?'s':''} ainda não selecionado${missing.length>1?'s':''}; sugestão pode ser refinada.)</em>`
+    : '';
+
+  box.style.display = 'block';
+  texto.innerHTML = justificativa + nota;
+  badge.textContent = sugestao;
+  badge.style.background = cor;
+  badge.style.color = corTexto;
+  badge.style.fontFamily = "'Montserrat', sans-serif";
+  badge.style.fontWeight = '800';
+}
+
+// ============ SPPB AUTO CALC ============
+function getSPPBPts(resultId) {
+  const el = document.getElementById(resultId);
+  if (!el || !el.classList.contains('visible')) return null;
+  const text = el.querySelector('p') ? el.querySelector('p').textContent : '';
+  const match = text.match(/Pontuação:\s*(\d+)/);
+  return match ? parseInt(match[1]) : null;
+}
+
+function calcSPPB() {
+  const p1 = getSPPBPts('sppb1_result');
+  const p2 = getSPPBPts('sppb2_result');
+  const p3 = getSPPBPts('sppb3_result');
+
+  if (p1 === null && p2 === null && p3 === null) return;
+
+  const total = (p1 || 0) + (p2 || 0) + (p3 || 0);
+  document.getElementById('sppb_total').value = total;
+
+  let interp = '';
+  if (total <= 3) interp = 'Desempenho físico muito baixo — alta probabilidade de fragilidade';
+  else if (total <= 6) interp = 'Desempenho físico baixo — moderada limitação funcional';
+  else if (total <= 9) interp = 'Desempenho físico moderado';
+  else interp = 'Desempenho físico bom — menores limitações funcionais';
+  document.getElementById('sppb_interp').value = interp;
+}
+
+// ============ SFT GENDER TOGGLE ============
+let sftGender = 'F';
+function setSFTGender(g) {
+  sftGender = g;
+  document.getElementById('sft_fem').classList.toggle('active', g === 'F');
+  document.getElementById('sft_mas').classList.toggle('active', g === 'M');
+  ['sft1','sft2','sft3','sft4','sft5','sft6'].forEach(id => {
+    const tabF = document.getElementById(id+'_tabF');
+    const tabM = document.getElementById(id+'_tabM');
+    if(tabF) tabF.style.display = g === 'F' ? '' : 'none';
+    if(tabM) tabM.style.display = g === 'M' ? '' : 'none';
+  });
+}
+
+// ============ COLLECT DATA ============
+function collectData() {
+  const get = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const getRadio = name => {
+    const sel = document.querySelector(`.radio-item.selected [name="${name}"]`);
+    return sel ? sel.value : '';
+  };
+  const getSNS = id => {
+    const btn = document.querySelector(`#${id} .sns-btn.selected-sim, #${id} .sns-btn.selected-nao, #${id} .sns-btn.selected-naosabe`);
+    return btn ? btn.textContent.trim() : '';
+  };
+  const getChecked = (containerSel) => {
+    const items = document.querySelectorAll(`${containerSel} .check-item.checked`);
+    return Array.from(items).map(i => i.textContent.trim().replace(/[\n\t]+/g,' ')).join(', ');
+  };
+  const getResult = id => {
+    const el = document.getElementById(id);
+    return el && el.classList.contains('visible') ? el.querySelector('p').textContent.trim() : '';
+  };
+
+  return {
+    // Identificação
+    nome: get('nome'), idade: get('idade'),
+    sexo: getRadio('sexo'), profissao: get('profissao'),
+    comquem: get('comquem'), telEmergencia: get('telEmergencia'),
+    data: get('dataAvaliacao'), avaliador: get('avaliador'),
+    // Histórico
+    doencas: getChecked('#doencas'), doencasObs: get('doencasObs'),
+    cirurgia: getSNS('sns_cirurgia'), medicacao: getSNS('sns_medicacao'),
+    alergia: getSNS('sns_alergia'), exames: getSNS('sns_exames'),
+    // Atividade
+    ativfis: getSNS('sns_ativfis'), expexerc: getRadio('expexerc'),
+    lesao: getSNS('sns_lesao'),
+    // Estilo
+    tabagismo: getSNS('sns_tabagismo'), alcool: getSNS('sns_alcool'),
+    alimentacao: getRadio('alimentacao'), hidratacao: getRadio('hidratacao'),
+    sono: getRadio('sono_hrs'), estresse: getRadio('estresse'), rotina: getRadio('rotina'),
+    // Funcional
+    vel_andar: getRadio('vel_andar'), sentar_lev: getRadio('sentar_lev'), agachar: getRadio('agachar'),
+    // Queixas
+    faltaar: getSNS('sns_faltaar'), tontura: getSNS('sns_tontura'),
+    sonoq: getSNS('sns_sono'), equilibrio: getSNS('sns_equilibrio'), incont: getSNS('sns_incont'),
+    // CV
+    cardio: getSNS('sns_cardio'), dordapeito: getSNS('sns_dordapeito'), respir: getRadio('respir'),
+    // Obj
+    disponib: getRadio('disponib'), grupopref: getRadio('grupopref'),
+    // Auto imagem
+    nota: get('notaCorporal'),
+    // SPPB
+    sppb1: getResult('sppb1_result'), sppb2_t: get('sppb2_tempo'), sppb2: getResult('sppb2_result'),
+    sppb3_t: get('sppb3_tempo'), sppb3: getResult('sppb3_result'),
+    sppb_total: get('sppb_total'), sppb_interp: get('sppb_interp'), sppb_obs: get('sppb_obs'),
+    // SFT
+    sftGender: sftGender === 'F' ? 'Feminino' : 'Masculino',
+    sft1_reps: get('sft1_reps'), sft1: getResult('sft1_result'),
+    sft2_reps: get('sft2_reps'), sft2: getResult('sft2_result'),
+    sft3_dist: get('sft3_dist'), sft3: getResult('sft3_result'),
+    sft4_t: get('sft4_tempo'), sft4: getResult('sft4_result'),
+    sft5_dist: get('sft5_dist'), sft5: getResult('sft5_result'),
+    sft6_m: get('sft6_metros'), sft6_borg: get('sft6_borg'), sft6_fc: get('sft6_fc'), sft6: getResult('sft6_result'),
+    sft7_t: get('sft7_tempo'), sft7_cl: getRadio('sft7_cl'), sft7_obs: get('sft7_obs'),
+    sft_classif_sugerida: (() => { const b = document.getElementById('sft_sugestao_badge'); return b ? b.textContent.trim() : ''; })(),
+    // Preensão
+    preen_t1: get('preen_t1'), preen_t2: get('preen_t2'), preen_t3: get('preen_t3'),
+    preen_melhor: get('preen_melhor'), preen: getResult('preen_result'),
+    // Extras
+    comentarios: get('comentarios'),
+  };
+}
+
+// ============ SALVAR ============
+function salvarAvaliacao() {
+  const data = collectData();
+  localStorage.setItem('longev_avaliacao', JSON.stringify(data));
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+  document.getElementById('postSave').classList.add('visible');
+}
+
+// ============ RELATÓRIO ============
+function abrirRelatorio() {
+  let data;
+  try { data = JSON.parse(localStorage.getItem('longev_avaliacao')) || collectData(); }
+  catch(e) { data = collectData(); }
+
+  const row = (label, val) => val ? `<div class="report-row"><div class="report-item"><strong>${label}</strong>${val}</div></div>` : '';
+  const sec = (title, content) => `<div class="report-section"><h3>${title}</h3>${content}</div>`;
+
+  const html = `
+    ${sec('Identificação', row('Nome',data.nome)+row('Idade',data.idade)+row('Sexo',data.sexo)+row('Profissão',data.profissao)+row('Com quem mora',data.comquem)+row('Tel. Emergência',data.telEmergencia)+row('Data',data.data)+row('Avaliador',data.avaliador))}
+    ${sec('Histórico Médico', row('Doenças',data.doencas)+row('Obs. doenças',data.doencasObs)+row('Cirurgias',data.cirurgia)+row('Medicações',data.medicacao)+row('Alergias',data.alergia)+row('Exames recentes',data.exames))}
+    ${sec('Atividade Física', row('Praticou regularmente',data.ativfis)+row('Experiência',data.expexerc)+row('Lesão anterior',data.lesao))}
+    ${sec('Queixas / Estilo de Vida', row('Falta de ar',data.faltaar)+row('Tontura',data.tontura)+row('Sono (queixa)',data.sonoq)+row('Equilíbrio',data.equilibrio)+row('Incontinência',data.incont)+row('Tabagismo',data.tabagismo)+row('Álcool',data.alcool)+row('Alimentação',data.alimentacao)+row('Hidratação',data.hidratacao)+row('Sono (horas)',data.sono)+row('Estresse',data.estresse)+row('Rotina',data.rotina))}
+    ${sec('Funcional / Cardiovascular', row('Velocidade ao andar',data.vel_andar)+row('Sentar/levantar',data.sentar_lev)+row('Agachar',data.agachar)+row('Doenças CV',data.cardio)+row('Dor no peito',data.dordapeito)+row('Dificuldade respirar',data.respir))}
+    ${sec('Objetivos', row('Disponibilidade',data.disponib)+row('Preferência',data.grupopref)+row('Nota corporal',data.nota+'/10'))}
+    ${sec('SPPB — Resultado', row('Teste 1 (Equilíbrio)',data.sppb1)+row('Teste 2 (Caminhada 4m)',`${data.sppb2_t}s — ${data.sppb2}`)+row('Teste 3 (Cadeira 5×)',`${data.sppb3_t}s — ${data.sppb3}`)+row('Total SPPB',data.sppb_total)+row('Interpretação',data.sppb_interp)+row('Observações',data.sppb_obs))}
+    ${sec('SFT — Resultado ('+data.sftGender+')',
+      row('Chair Stand',`${data.sft1_reps} rep — ${data.sft1}`) +
+      row('Arm Curl',`${data.sft2_reps} rep — ${data.sft2}`) +
+      row('Sit-and-Reach',`${data.sft3_dist} cm — ${data.sft3}`) +
+      row('TUG Test',`${data.sft4_t}s — ${data.sft4}`) +
+      row('Back Scratch',`${data.sft5_dist} cm — ${data.sft5}`) +
+      row('Caminhada 6 min',`${data.sft6_m}m | Borg: ${data.sft6_borg} | FC rec: ${data.sft6_fc} — ${data.sft6}`) +
+      row('Equilíbrio Unipodal',`${data.sft7_t}s`) +
+      row('Classificação final SFT',data.sft7_cl) +
+      row('Classificação sugerida pelo sistema',data.sft_classif_sugerida) +
+      row('Observações',data.sft7_obs)
+    )}
+    ${sec('Preensão Manual', row('Tentativas',`${data.preen_t1} / ${data.preen_t2} / ${data.preen_t3} kg`)+row('Melhor valor',data.preen_melhor+' kg')+row('Classificação',data.preen))}
+    ${data.comentarios ? sec('Comentários', row('',data.comentarios)) : ''}
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir Relatório</button>
+  `;
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('modalRelatorio').classList.add('visible');
+}
+
+function fecharRelatorio() {
+  document.getElementById('modalRelatorio').classList.remove('visible');
+}
+
+// ============ NOVA AVALIAÇÃO ============
+function novaAvaliacao() {
+  if (!confirm('Iniciar nova avaliação? Os dados atuais serão apagados.')) return;
+  // Reset all inputs
+  document.querySelectorAll('.sft-interp-panel').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.interp-option').forEach(el => el.classList.remove('selected'));
+  const sugestaoBox = document.getElementById('sft_sugestao_box');
+  if (sugestaoBox) sugestaoBox.style.display = 'none';
+  Object.keys(sftResults).forEach(k => delete sftResults[k]);
+  document.querySelectorAll('input[type="text"], input[type="tel"], input[type="number"], input[type="date"], textarea').forEach(el => el.value = '');
+  document.querySelectorAll('.check-item').forEach(el => el.classList.remove('checked'));
+  document.querySelectorAll('.radio-item').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.sns-btn').forEach(el => el.className = 'sns-btn');
+  document.querySelectorAll('.sub-field').forEach(el => el.classList.remove('visible'));
+  document.querySelectorAll('tbody tr').forEach(el => el.classList.remove('row-selected'));
+  document.querySelectorAll('.selected-result-display').forEach(el => { el.classList.remove('visible'); el.innerHTML = ''; });
+  document.getElementById('notaCorporal').value = 5;
+  document.getElementById('notaDisplay').textContent = '5';
+  document.getElementById('postSave').classList.remove('visible');
+  setSFTGender('F');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Close modal on overlay click
+document.getElementById('modalRelatorio').addEventListener('click', function(e) {
+  if(e.target === this) fecharRelatorio();
+});
+</script>
+</body>
+</html>
